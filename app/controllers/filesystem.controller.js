@@ -1,143 +1,144 @@
 const db = require("../models");
-const Tutorial = db.tutorials;
+const File = db.filesystem;
 
-// Create and Save a new Tutorial
+// Create and Save a new Document
 exports.create = (req, res) => {
     // Validate request
-    if (!req.body.title) {
+    if (!req.body.parent) {
       res.status(400).send({ message: "Content can not be empty!" });
       return;
     }
-  
-    // Create a Tutorial
-    const tutorial = new Tutorial({
-      title: req.body.title,
-      description: req.body.description,
-      published: req.body.published ? req.body.published : false
+
+    // Create a File
+    const file = new File({
+
+      parent: req.body.parent, // null if root folder
+      metadata: req.body.metadata
     });
-  
-    // Save Tutorial in the database
-    tutorial
-      .save(tutorial)
+
+    // Save File in the database
+    file
+      .save(file)
+      // .save(File, { validateBeforeSave: false })
       .then(data => {
         res.send(data);
       })
       .catch(err => {
         res.status(500).send({
           message:
-            err.message || "Some error occurred while creating the Tutorial."
+            err.message || "Some error occurred while creating the File."
         });
       });
   };
 
-// Retrieve all Tutorials from the database.
+// Retrieve all Files from the database.
 exports.findAll = (req, res) => {
     const title = req.query.title;
     var condition = title ? { title: { $regex: new RegExp(title), $options: "i" } } : {};
-  
-    Tutorial.find(condition)
+
+    File.find(condition)
       .then(data => {
         res.send(data);
       })
       .catch(err => {
         res.status(500).send({
           message:
-            err.message || "Some error occurred while retrieving tutorials."
+            err.message || "Some error occurred while retrieving Files."
         });
       });
   };
 
-// Find a single Tutorial with an id
+// Find a single File with an id
 exports.findOne = (req, res) => {
     const id = req.params.id;
-  
-    Tutorial.findById(id)
+
+    File.findById(id)
       .then(data => {
         if (!data)
-          res.status(404).send({ message: "Not found Tutorial with id " + id });
+          res.status(404).send({ message: "Not found File with id " + id });
         else res.send(data);
       })
       .catch(err => {
         res
           .status(500)
-          .send({ message: "Error retrieving Tutorial with id=" + id });
+          .send({ message: "Error retrieving File with id=" + id });
       });
   };
 
-// Update a Tutorial by the id in the request
+// Update a File by the id in the request
 exports.update = (req, res) => {
     if (!req.body) {
       return res.status(400).send({
         message: "Data to update can not be empty!"
       });
     }
-  
+
     const id = req.params.id;
-  
-    Tutorial.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+
+    File.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
       .then(data => {
         if (!data) {
           res.status(404).send({
-            message: `Cannot update Tutorial with id=${id}. Maybe Tutorial was not found!`
+            message: `Cannot update File with id=${id}. Maybe File was not found!`
           });
-        } else res.send({ message: "Tutorial was updated successfully." });
+        } else res.send({ message: "File was updated successfully." });
       })
       .catch(err => {
         res.status(500).send({
-          message: "Error updating Tutorial with id=" + id
+          message: "Error updating File with id=" + id
         });
       });
   };
 
-// Delete a Tutorial with the specified id in the request
+// Delete a File with the specified id in the request
 exports.delete = (req, res) => {
     const id = req.params.id;
-  
-    Tutorial.findByIdAndRemove(id)
+
+    File.findByIdAndRemove(id)
       .then(data => {
         if (!data) {
           res.status(404).send({
-            message: `Cannot delete Tutorial with id=${id}. Maybe Tutorial was not found!`
+            message: `Cannot delete File with id=${id}. Maybe File was not found!`
           });
         } else {
           res.send({
-            message: "Tutorial was deleted successfully!"
+            message: "File was deleted successfully!"
           });
         }
       })
       .catch(err => {
         res.status(500).send({
-          message: "Could not delete Tutorial with id=" + id
+          message: "Could not delete File with id=" + id
         });
       });
   };
 
-// Delete all Tutorials from the database.
+// Delete all Files from the database.
 exports.deleteAll = (req, res) => {
-    Tutorial.deleteMany({})
+    File.deleteMany({})
       .then(data => {
         res.send({
-          message: `${data.deletedCount} Tutorials were deleted successfully!`
+          message: `${data.deletedCount} Files were deleted successfully!`
         });
       })
       .catch(err => {
         res.status(500).send({
           message:
-            err.message || "Some error occurred while removing all tutorials."
+            err.message || "Some error occurred while removing all Files."
         });
       });
   };
 
-// Find all published Tutorials
+// Find all published Files
 exports.findAllPublished = (req, res) => {
-    Tutorial.find({ published: true })
+    File.find({ published: true })
       .then(data => {
         res.send(data);
       })
       .catch(err => {
         res.status(500).send({
           message:
-            err.message || "Some error occurred while retrieving tutorials."
+            err.message || "Some error occurred while retrieving Files."
         });
       });
   };
