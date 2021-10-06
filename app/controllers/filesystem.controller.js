@@ -1,3 +1,5 @@
+// Set up functions to work with CRUD operations
+
 const db = require("../models");
 const File = db.filesystem;
 
@@ -9,14 +11,13 @@ exports.create = (req, res) => {
       return;
     }
 
-    // Create a File
+    // Create a new document by creating an instance of the model
     const file = new File({
-
       parent: req.body.parent, // null if root folder
       metadata: req.body.metadata
     });
 
-    // Save File in the database
+    // Save document in the database
     file
       .save(file)
       // .save(File, { validateBeforeSave: false })
