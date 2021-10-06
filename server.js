@@ -31,6 +31,7 @@ db.mongoose
   }, function(err, db) {
     if (err) {
       console.log("Cannot connect to the database:", err)
+      process.exit();
     } else {
       console.log(db);
       db.models.filesystem.deleteMany()
@@ -46,12 +47,6 @@ db.mongoose
       }) // end of insertion
     }
   }) // end of connection
-  // }).then(() => {
-  //   console.log("Successfully connected to the database")
-  // }).catch(err => {
-  //   console.log("Cannot connect to the database:", err);
-  //   process.exit();
-  // }) // end of connection
 
 // simple test route
 app.get("/", (req, res) => {
