@@ -1,3 +1,5 @@
+// To set up routes and their responses
+
 module.exports = app => {
     const filesystem = require("../controllers/filesystem.controller.js");
 
