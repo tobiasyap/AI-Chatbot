@@ -13,8 +13,13 @@ exports.create = (req, res) => {
     const file = new File({
 
       parent: req.body.parent, // null if root folder
+      avatar: req.body.avatar,
       metadata: req.body.metadata
     });
+
+    if(req.file) {
+      file.avatar = req.file.path
+    }
 
     // Save File in the database
     file
