@@ -14,10 +14,15 @@ exports.create = (req, res) => {
     // Create a new document by creating an instance of the model
     const file = new File({
       parent: req.body.parent, // null if root folder
+      avatar: req.body.avatar,
       metadata: req.body.metadata
     });
 
-    // Save document in the database
+    if(req.file) {
+      file.avatar = req.file.path
+    }
+
+    // Save File in the database
     file
       .save(file)
       // .save(File, { validateBeforeSave: false })

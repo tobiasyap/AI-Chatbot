@@ -6,6 +6,7 @@ module.exports = mongoose => {
       mongoose.Schema(
         {
           parent: String, // null if root folder
+          avatar: String,
           metadata: { // for files only
             title: String,
             doc_cat: String,
