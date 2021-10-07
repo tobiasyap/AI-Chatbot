@@ -5,26 +5,29 @@ module.exports = app => {
 
     var router = require("express").Router();
 
-    // Create a new File
-    router.post("/", filesystem.create);
+    // Create a new file
+    router.post("/files", filesystem.create);
 
     // Retrieve all files
     router.get("/files", filesystem.findAll);
 
+    // Retrieve a single file with title
+    router.get("/files?title=:title", filesystem.findAll);
+
     // Retrieve all published files
     // router.get("/published", filesystem.findAllPublished);
 
-    // Retrieve a single File with id
+    // Retrieve a single file with id
     router.get("/files/:id", filesystem.find);
 
     // Update a File with id
-    router.put("/:id", filesystem.update);
+    router.put("/files/:id", filesystem.update);
 
     // Delete a File with id
-    router.delete("/:id", filesystem.delete);
+    router.delete("/files/:id", filesystem.delete);
 
     // Delete all Files
-    router.delete("/", filesystem.deleteAll);
+    router.delete("/files", filesystem.deleteAll);
 
     app.use('/api/filesystem', router);
   };
