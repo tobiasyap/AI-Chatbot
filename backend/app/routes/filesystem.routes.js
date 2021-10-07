@@ -7,7 +7,7 @@ module.exports = app => {
   var router = require("express").Router();
 
   // Create a new file
-  router.post("/files", upload.single('avatar'), filesystem.create);
+  router.post("/files", upload.single('doc'), filesystem.create);
 
   // Retrieve all files
   router.get("/files", filesystem.findAll);
