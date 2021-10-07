@@ -1,38 +1,34 @@
-// To set up routes and their responses
+  // To set up routes and their responses
 
 module.exports = app => {
-    const filesystem = require("../controllers/filesystem.controller.js");
-    const upload = require('../middleware/upload')
+  const filesystem = require("../controllers/filesystem.controller.js");
+  const upload = require('../middleware/upload')
 
-    var router = require("express").Router();
+  var router = require("express").Router();
 
-    // Create a new File
-    router.post("/", upload.single('avatar'), filesystem.create);
+  // Create a new file
+  router.post("/files", upload.single('avatar'), filesystem.create);
 
-    // Retrieve all files
-    router.get("/", filesystem.findAll);
+  // Retrieve all files
+  router.get("/files", filesystem.findAll);
 
-    // Retrieve all published files
-    router.get("/published", filesystem.findAllPublished);
+  // Retrieve a single file with title
+  router.get("/files?title=:title", filesystem.findAll);
 
-    // Retrieve a single File with id
-    router.get("/:id", filesystem.findOne);
+  // Retrieve all published files
+  // router.get("/published", filesystem.findAllPublished);
 
-    // Update a File with id
-    router.put("/:id", filesystem.update);
+  // Retrieve a single file with id
+  router.get("/files/:id", filesystem.find);
 
-    // Delete a File with id
-    router.delete("/:id", filesystem.delete);
+  // Update a File with id
+  router.put("/files/:id", filesystem.update);
 
-    // Delete all Files
-    router.delete("/", filesystem.deleteAll);
+  // Delete a File with id
+  router.delete("/files/:id", filesystem.delete);
 
-    // Not working get file by ID
-    router.get("/get/:id", async (req, res, next) => {
-      const { id: _id } = req.params;
-      const file = await filesystem.findOne({ _id }).lean().exec();
-      res.send(file);
-    });
+  // Delete all Files
+  router.delete("/files", filesystem.deleteAll);
 
-    app.use('/api/filesystem', router);
-  };
+  app.use('/api/filesystem', router);
+};
