@@ -17,9 +17,16 @@ app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
+// // parse requests of content-type - application/json
+// app.use(bodyParser.json());
+
+// // parse requests of content-type - application/x-www-form-urlencoded
+// app.use(bodyParser.urlencoded({ extended: true }));
+
 const db = require("./app/models");
 
 var fs = require('fs');
+const { controller } = require("./app/controllers/filesystem.controller");
 var data = fs.readFileSync('docs.txt', 'utf8').toString();
 var docs = JSON.parse(data);
 
@@ -41,7 +48,8 @@ db.mongoose
           console.log("Cannot delete the documents:", err);
         }) // end of deletion
       db.models.filesystem.insertMany(docs, function(error, inserted) {
-          console.log("Successfully inserted: ", inserted);
+          // console.log("Successfully inserted: ", inserted);
+          console.log("Successfully inserted");
       }).catch(err => {
         console.log("Cannot insert the documents:", err);
       }) // end of insertion
@@ -52,6 +60,16 @@ db.mongoose
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to the filesystem application." });
 });
+
+// insert all documents 
+// app.post("/files", (req, res) => {
+//   controller.createAll(docs)
+// })
+
+// delete all documents
+// app.post("/delete", (req, res) => {
+//   controller.deleteAll()
+// })
 
 require("./app/routes/filesystem.routes")(app);
 
