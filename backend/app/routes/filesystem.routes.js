@@ -9,13 +9,13 @@ module.exports = app => {
     router.post("/", filesystem.create);
 
     // Retrieve all files
-    router.get("/", filesystem.findAll);
+    router.get("/files", filesystem.findAll);
 
     // Retrieve all published files
-    router.get("/published", filesystem.findAllPublished);
+    // router.get("/published", filesystem.findAllPublished);
 
     // Retrieve a single File with id
-    router.get("/:id", filesystem.findOne);
+    router.get("/files/:id", filesystem.find);
 
     // Update a File with id
     router.put("/:id", filesystem.update);

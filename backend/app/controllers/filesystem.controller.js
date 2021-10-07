@@ -32,13 +32,53 @@ exports.create = (req, res) => {
       });
   };
 
+// Create and save all Documents
+exports.createAll = (req, res) => {
+    // Validate request
+    if (!req.body.parent) {
+      res.status(400).send({ message: "Content can not be empty!" });
+      return;
+    }
+  
+    console.log(req.body)
+    File.insertMany(req.body, function(error, inserted) {
+      if (error) {
+        console.log(error.message || "Some error occurred while creating the File.");
+      } else {
+        console.log("Successfully inserted: ", inserted);
+      }
+    })
+    // // Create new documents by creating an instance of the model
+    // const file = new File({
+    //   parent: req.body.parent, // null if root folder
+    //   metadata: req.body.metadata
+    // });
+
+    // Save document in the database
+    // file
+    //   .save(file)
+    //   // .save(File, { validateBeforeSave: false })
+    //   .then(data => {
+    //     res.send(data);
+    //   })
+    //   .catch(err => {
+    //     res.status(500).send({
+    //       message:
+    //         err.message || "Some error occurred while creating the File."
+    //     });
+    //   });
+} 
+
 // Retrieve all Files from the database.
 exports.findAll = (req, res) => {
+    // console.log(req)
     const title = req.query.title;
+    // console.log(title)
     var condition = title ? { title: { $regex: new RegExp(title), $options: "i" } } : {};
 
     File.find(condition)
       .then(data => {
+        // console.log(data)
         res.send(data);
       })
       .catch(err => {
@@ -50,7 +90,7 @@ exports.findAll = (req, res) => {
   };
 
 // Find a single File with an id
-exports.findOne = (req, res) => {
+exports.find = (req, res) => {
     const id = req.params.id;
 
     File.findById(id)
@@ -131,15 +171,15 @@ exports.deleteAll = (req, res) => {
   };
 
 // Find all published Files
-exports.findAllPublished = (req, res) => {
-    File.find({ published: true })
-      .then(data => {
-        res.send(data);
-      })
-      .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while retrieving Files."
-        });
-      });
-  };
+// exports.findAllPublished = (req, res) => {
+//     File.find({ published: true })
+//       .then(data => {
+//         res.send(data);
+//       })
+//       .catch(err => {
+//         res.status(500).send({
+//           message:
+//             err.message || "Some error occurred while retrieving Files."
+//         });
+//       });
+//   };
