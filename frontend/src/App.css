@@ -1,8 +1,17 @@
 /* For react components */
+.file-list {
+  max-height: 400px;
+  min-width: 300px;
+  overflow-y: scroll;
+}
+
+.folder-list {
+  min-width: 300px;
+}
 
 .list {
   text-align: left;
-  max-width: 750px;
+  /* max-width: 750px; */
   margin: auto;
 }
 
