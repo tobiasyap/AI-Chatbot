@@ -35,23 +35,20 @@ db.mongoose
   .connect(db.url, {
     useNewUrlParser: true,
     useUnifiedTopology: true
-  }, function(err, db) {
+  }, async function(err, db) {
     if (err) {
       console.log("Cannot connect to the database:", err)
       process.exit();
     } else {
-      console.log(db);
-      db.models.filesystem.deleteMany()
-        .then(response => {
-          console.log("response:", response);
-        }).catch(err => {
-          console.log("Cannot delete the documents:", err);
-        }) // end of deletion
-      db.models.filesystem.insertMany(docs, function(error, inserted) {
-          // console.log("Successfully inserted: ", inserted);
-          console.log("Successfully inserted");
-      }).catch(err => {
-        console.log("Cannot insert the documents:", err);
+      await db.models.filesystem.deleteMany().then(response => {
+        console.log("response:", response);
+      }, error => { 
+        console.log("Cannot delete the documents:", error);
+      }) // end of deletion
+      await db.models.filesystem.insertMany(docs).then(response => {
+        console.log("Successfully inserted");
+      }, error => {
+        console.log("Cannot insert the documents:", error);
       }) // end of insertion
     }
   }) // end of connection
