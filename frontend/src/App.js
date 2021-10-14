@@ -6,7 +6,8 @@ import './App.css';
 
 import File from "./components/file.component";
 import AddFile from "./components/add-file.component";
-import FileList from "./components/file-list.component"
+import FileList from "./components/file-list.component";
+import Chatbot from "./components/chatbot";
 
 class App extends Component {
   render() {
@@ -33,7 +34,7 @@ class App extends Component {
         <div className="container mt-3">
           <Switch>
           <Route exact path={["/", "/files"]} component={FileList} />
-          <Route exact path={"/add"} component={AddFile} />
+          <Route exact path={"/add"} component={Chatbot} />
           <Route exact path={"/files/:id"} component={File} />
           </Switch>
         </div>
