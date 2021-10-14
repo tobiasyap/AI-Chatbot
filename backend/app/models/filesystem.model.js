@@ -5,12 +5,12 @@ module.exports = mongoose => {
       "filesystem",
       mongoose.Schema(
         {
+          doc_no: String,
           parent: String, // null if root folder
           metadata: { // for files only
             title: String,
             doc_cat: String,
             doc_type: String,
-            doc_no: String,
             doc: String, // should be the actual file
             grp: String, // root
             subgrp: String, // parent

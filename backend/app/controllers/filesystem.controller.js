@@ -71,14 +71,10 @@ exports.createAll = (req, res) => {
 
 // Retrieve all Files from the database.
 exports.findAll = (req, res) => {
-    // console.log(req)
     const title = req.query.title;
-    // console.log(title)
-    var condition = title ? { title: { $regex: new RegExp(title), $options: "i" } } : {};
-
+    var condition = title ? { doc_no: { $regex: new RegExp(title), $options: "i" } } : {};
     File.find(condition)
       .then(data => {
-        // console.log(data)
         res.send(data);
       })
       .catch(err => {
