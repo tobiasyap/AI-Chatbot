@@ -203,7 +203,7 @@ class FileList extends Component {
                             onClick={() => this.setActiveFile(file, index)}
                             key={index}
                             >
-                            {file.metadata.doc}
+                            {file.doc}
                             </li>
                         ))}
                     </ul>
@@ -259,8 +259,8 @@ class FileList extends Component {
                             <label>
                             <strong>Download Document:</strong>
                             </label>{" "}
-                            <a href={"../../public/files/" + currentFile.metadata.doc} download>
-                            {currentFile.metadata.doc}
+                            <a href={"../../public/files/" + currentFile.doc} download>
+                            {currentFile.doc}
                             </a>
                         </div>
                         <div>
