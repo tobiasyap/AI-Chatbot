@@ -6,7 +6,8 @@ import './App.css';
 
 import File from "./components/file.component";
 import AddFile from "./components/add-file.component";
-import FileList from "./components/file-list.component"
+import FileList from "./components/file-list.component";
+import AIChatBot from "./components/AIChatBot";
 
 class App extends Component {
   render() {
@@ -36,6 +37,10 @@ class App extends Component {
           <Route exact path={"/add"} component={AddFile} />
           <Route exact path={"/files/:id"} component={File} />
           </Switch>
+        </div>
+
+        <div>
+          <AIChatBot/>
         </div>
       </Router>
 
