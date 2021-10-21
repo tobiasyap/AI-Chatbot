@@ -12,7 +12,6 @@ module.exports = mongoose => {
             title: String,
             doc_cat: String,
             doc_type: String,
-            doc: String, // should be the actual file
             grp: String, // root
             subgrp: String, // parent
             created: Date,

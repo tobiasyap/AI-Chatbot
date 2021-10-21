@@ -19,7 +19,7 @@ exports.create = (req, res) => {
     });
 
     if(req.file) {
-      file.doc = req.file.path
+      file.doc = req.file.filename
     }
 
     // Save File in the database
