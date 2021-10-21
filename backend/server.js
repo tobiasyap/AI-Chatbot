@@ -27,7 +27,7 @@ const db = require("./app/models");
 
 var fs = require('fs');
 const { controller } = require("./app/controllers/filesystem.controller");
-var data = fs.readFileSync('docs.txt', 'utf8').toString();
+var data = fs.readFileSync('./nlp-model/docs.txt', 'utf8').toString();
 var docs = JSON.parse(data);
 
 // connect to database and insert files
@@ -69,6 +69,7 @@ app.get("/", (req, res) => {
 // })
 
 require("./app/routes/filesystem.routes")(app);
+require("./app/routes/chatbot.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
