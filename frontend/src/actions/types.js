@@ -5,3 +5,4 @@ export const RETRIEVE_FILES = "RETRIEVE_FILES";
 export const UPDATE_FILE = "UPDATE_FILE";
 export const DELETE_FILE = "DELETE_FILE";
 export const DELETE_ALL_FILES = "DELETE_ALL_FILES";
+export const GET_MODEL = "GET_MODEL";

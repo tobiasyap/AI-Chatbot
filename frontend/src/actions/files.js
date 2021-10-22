@@ -1,4 +1,4 @@
-// For CRUD (create/retrieve/update/delete) actions 
+// For CRUD (create/retrieve/update/delete) actions on filesystem
 
 import {
     CREATE_FILE,
