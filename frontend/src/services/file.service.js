@@ -1,34 +1,35 @@
-// Data service that uses axios object to send HTTP requests/ make API calls
+// Data service that uses axios object to send HTTP requests/ make API calls for filesystem
 
 import http from "../http-common";
 
 class FileDataService {
+  
   getAll() {
-    return http.get("/files");
+    return http.get("/filesystem/files");
   }
 
   get(id) {
-    return http.get(`/files/${id}`);
+    return http.get(`/filesystem/files/${id}`);
   }
 
   create(data) {
-    return http.post("/files", data);
+    return http.post("/filesystem/files", data);
   }
 
   update(id, data) {
-    return http.put(`/files/${id}`, data);
+    return http.put(`/filesystem/files/${id}`, data);
   }
 
   delete(id) {
-    return http.delete(`/files/${id}`);
+    return http.delete(`/filesystem/files/${id}`);
   }
 
   deleteAll() {
-    return http.delete(`/files`);
+    return http.delete(`/filesystem/files`);
   }
 
   findByTitle(title) {
-    return http.get(`/files?title=${title}`);
+    return http.get(`/filesystem/files?title=${title}`);
   }
 }
 

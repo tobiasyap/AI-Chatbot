@@ -203,7 +203,7 @@ class FileList extends Component {
                             onClick={() => this.setActiveFile(file, index)}
                             key={index}
                             >
-                            {file.doc}
+                            {file.doc_no}
                             </li>
                         ))}
                     </ul>
