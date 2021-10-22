@@ -13,6 +13,7 @@ exports.create = (req, res) => {
 
     // Create a new document by creating an instance of the model
     const file = new File({
+      doc_no:  req.body.doc_no,
       parent: req.body.parent, // null if root folder
       doc: req.body.doc,
       metadata: req.body.metadata

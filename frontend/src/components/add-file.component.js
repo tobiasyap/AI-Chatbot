@@ -1,10 +1,13 @@
 // For uploading documents
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import bsCustomFileInput from 'bs-custom-file-input'
 
 const AddFile = () => {
-  bsCustomFileInput.init()
+  //bsCustomFileInput.init()
+  useEffect(() => {
+    bsCustomFileInput.init();
+  }, []);
 
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(false);
@@ -40,6 +43,9 @@ const AddFile = () => {
             <label for="metadata[title]" class="form-label mt-3">Title:</label>
             <input type="text" name="metadata[title]" class="form-control"></input>
 
+            <label for="doc_no" class="form-label mt-3">Document Number:</label>
+            <input type="text" name="doc_no" class="form-control"></input>
+
             <label for="metadata[doc_cat]" class="form-label mt-3">Document Category:</label>
             <input type="text" name="metadata[doc_cat]" class="form-control"></input>
             
@@ -52,7 +58,7 @@ const AddFile = () => {
             <label for="metadata[subgrp]" class="form-label mt-3">Subgroup:</label>
             <input type="text" name="metadata[subgrp]" class="form-control"></input>
 
-            <label for="metadata[created]" class="form-label mt-3">Date Created:</label>
+            <label for="metadata[created]" class="form-label mt-3">Effective Date:</label>
             <input type="date" name="metadata[created]" class="form-control"></input>
 
             <label for="metadata[revision_no]" class="form-label mt-3">Revision Number:</label>
