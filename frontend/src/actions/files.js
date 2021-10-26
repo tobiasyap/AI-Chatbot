@@ -5,7 +5,8 @@ import {
     RETRIEVE_FILES,
     UPDATE_FILE,
     DELETE_FILE,
-    DELETE_ALL_FILES
+    // DELETE_ALL_FILES,
+    FIND_FILES
 } from "./types";
   
 import FileDataService from "../services/file.service";
@@ -57,6 +58,18 @@ export const updateFile = (id, data) => async (dispatch) => {
     }
   };
 
+  export const setActiveFile = (file) => (dispatch) => {
+    try {
+      dispatch({
+        type: UPDATE_FILE,
+        payload: file
+      });
+
+    } catch(err) {
+      return Promise.reject(err)
+    }
+  }
+
 // calls FileDataService.delete() and dispatches DELETE_FILE  
 export const deleteFile = (id) => async (dispatch) => {
     try {
@@ -72,20 +85,20 @@ export const deleteFile = (id) => async (dispatch) => {
   };
   
 // calls FileDataService.deleteAll() and dispatches DELETE_ALL_FILES 
-export const deleteAllFiles = () => async (dispatch) => {
-    try {
-      const res = await FileDataService.deleteAll();
+// export const deleteAllFiles = () => async (dispatch) => {
+//     try {
+//       const res = await FileDataService.deleteAll();
   
-      dispatch({
-        type: DELETE_ALL_FILES,
-        payload: res.data,
-      });
+//       dispatch({
+//         type: DELETE_ALL_FILES,
+//         payload: res.data,
+//       });
   
-      return Promise.resolve(res.data);
-    } catch (err) {
-      return Promise.reject(err);
-    }
-  }
+//       return Promise.resolve(res.data);
+//     } catch (err) {
+//       return Promise.reject(err);
+//     }
+//   }
   
 // calls FileDataService.findByTitle() and dispatches RETRIEVE_FILES  
 export const findFilesByTitle = (title) => async (dispatch) => {
@@ -93,7 +106,7 @@ export const findFilesByTitle = (title) => async (dispatch) => {
       const res = await FileDataService.findByTitle(title);
   
       dispatch({
-        type: RETRIEVE_FILES,
+        type: FIND_FILES,
         payload: res.data,
       });
     } catch (err) {

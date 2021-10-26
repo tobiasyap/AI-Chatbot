@@ -15,6 +15,20 @@
   margin: auto;
 }
 
+a {
+  color: #014282;
+}
+
+.link {
+  color: #fff;
+  cursor: pointer;
+}
+
+.link:hover {
+   color: #014282;
+   cursor: pointer;
+}
+
 .input {
   min-width: 500px;
 }
@@ -22,6 +36,11 @@
 .submit-form {
   max-width: 300px;
   margin: auto;
+}
+
+.btn {
+  color: #fff;
+  background-color: #014282;
 }
 
 .edit-form {

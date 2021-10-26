@@ -43,8 +43,6 @@ class App extends Component {
           <AIChatBot/>
         </div>
       </Router>
-
-      // insert chatbot component
     );
   }
 }

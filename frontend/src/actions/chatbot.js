@@ -11,7 +11,7 @@ export const getModel = (query) => async (dispatch) => {
     try {
       const res = await ChatbotDataService.getModel({query});
       // console.log("Received response", res)
-      // console.log(res)
+      console.log(res)
   
       dispatch({
         type: GET_MODEL,

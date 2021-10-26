@@ -2,9 +2,10 @@
 
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { retrieveFiles, findFilesByTitle, deleteAllFiles } from "../actions/files";
+import { retrieveFiles, setActiveFile, findFilesByTitle } from "../actions/files";
 import { Link } from "react-router-dom";
 import { Container, Nav } from "react-bootstrap"
+import AIChatBot from "./AIChatBot";
 
 class FileList extends Component {
     constructor(props) {
@@ -14,49 +15,60 @@ class FileList extends Component {
         this.setActiveFile = this.setActiveFile.bind(this);
         this.setActiveRoot = this.setActiveRoot.bind(this);
         this.setActiveFolder = this.setActiveFolder.bind(this);
-        this.handleSelect = this.handleSelect.bind(this);
-
+        this.setActiveSubgrp = this.setActiveSubgrp.bind(this);
+        this.getDisplayFiles = this.getDisplayFiles.bind(this);
         this.findByTitle = this.findByTitle.bind(this);
-        this.removeAllFiles = this.removeAllFiles.bind(this);
-        // this.listFiles = this.listFiles.bind(this);
     
         this.state = {
-          roots: ['RSE'],
-          subgrps: ['FS'],
-          currentFileList: [],
-          currentFile: null,
-          currentFileIndex: -1,
-          currentRoot: 'RSE',
-          currentFolder: 'FS',
-        //   currentRoot: null,
-          currentRootIndex: -1,
-          searchTitle: "",
-          folders: ['SP', 'SD']
-        };
-
+        //     files: [],
+        //     roots: [],
+        //     subgrps: [],
+        //     currentFileList: [],
+            // currentFile: null,
+            currentRoot: null,
+            currentFolder: null,
+            currentSubgrp: null,
+            currentFileList: [],
+            searchTitle: "",
+        //     folders: []
+        }
     }
 
-    componentDidMount() {
-        this.props.retrieveFiles();
+    async componentDidMount() {
+        await this.refreshData();
     }
 
-    onChangeSearchTitle(e) {
+    onChangeSearchTitle = async (e) => {
         const searchTitle = e.target.value;
 
-        this.setState({
+        await this.setState({
             searchTitle: searchTitle,
         });
     }
 
-    refreshData() {
-        this.props.retrieveFiles()
-        this.setState({
-            currentFileList: null,
-            currentFile: null,
-            currentFileIndex: -1,
-            currentRoot: 'RSE',
-            currentRootIndex: -1
-        });
+    // getDerivedStateFromProps(props, state) {
+    //     this.setState({
+    //         currentFileList: this.props.files.currentFileList,
+    //         currentRoot: this.props.files.roots[0],
+    //         currentFolder: this.props.files.folders[0],
+    //         currentSubgrp: this.props.files.subgrps[0],
+    //         // currentFile: null
+    //     })
+    // }
+
+    refreshData = async() => {
+        await this.props.retrieveFiles()
+        // console.log(this.props)
+
+        await this.setState({
+            currentFileList: this.props.currentFileList,
+            // currentRoot: this.props.files.roots[0],
+            // currentFolder: this.props.files.folders[0],
+            // currentSubgrp: this.props.files.subgrps[0],
+            // currentFile: null
+        })
+
+        // console.log(this.state)
     }
 
     // listFiles(files) {
@@ -69,67 +81,69 @@ class FileList extends Component {
     //     });
     // }
 
-    setActiveRoot(root, index) {
-        // console.log(this.props.data)
-        // const displayFiles = this.props.data.filter(doc => doc.metadata.grp == this.state.currentRoot)
-        // this.setActiveFolder(this.props.subgrp, 1);
-        this.refreshData()
-        this.setState({
+    setActiveRoot = async (rootIndex) => {
+        const root = this.props.roots[rootIndex];
+        // const displayFiles = this.props.files.files.filter(doc => doc.metadata.grp === root);
+        await this.setState({
           currentRoot: root,
-          currentRootIndex: index
-        //   currentFileList: displayFiles
-        //   currentFileList: this.props.filter(doc => doc.metadata.grp == this.state.currentRoot)
+          currentFolder: null,
+          currentSubgrp: null
         });
+        this.getDisplayFiles()
+        console.log(this.state.currentFileList)
     }
 
-    setActiveFolder(folder, index) {
-        // const displayFiles = this.props.data.filter(doc => doc.parent == this.state.currentFolder)
-        this.setState({
+    setActiveFolder = async (folderIndex) => {
+        const folder = this.props.folders[folderIndex];
+        // const displayFiles = this.props.files.files.filter(doc => doc.doc_no.includes(folder));
+        await this.setState({
           currentFolder: folder,
-          currentFolderIndex: index
-        //   currentFileList: displayFiles
-        //   currentFileList: this.props.filter(doc => doc.metadata.grp == this.state.currentRoot)
+          currentSubgrp: null
         });
+        console.log(this.state);
+        this.getDisplayFiles()
     }
 
-    setActiveFile(file, index) {
-        this.setState({
-          currentFile: file,
-          currentFileIndex: index,
+    setActiveSubgrp = async (subgrpIndex) => {
+        const subgrp = this.props.subgrps[subgrpIndex];
+        // const displayFiles = this.props.files.files.filter(doc => doc.parent == subgrp);
+        await this.setState({
+          currentSubgrp: subgrp,
         });
+        this.getDisplayFiles()
+        console.log(this.state.currentFileList)
     }
 
-    removeAllFiles() {
-        this.props
-            .deleteAllFiles()
-            .then((response) => {
-            console.log(response);
-            this.refreshData();
-            })
-            .catch((e) => {
-            console.log(e);
-            });
+    getDisplayFiles = async () => {
+        var displayFiles = this.state.currentRoot ? this.props.files.filter(doc => doc.metadata.grp === this.state.currentRoot) : this.props.files;
+        displayFiles = this.state.currentFolder ? displayFiles.filter(doc => doc.doc_no.includes(this.state.currentFolder)) : displayFiles;
+        displayFiles = this.state.currentSubgrp ? displayFiles.filter(doc => doc.parent === this.state.currentSubgrp) : displayFiles;
+        await this.setState({
+            currentFileList: displayFiles
+        })
+        return displayFiles
     }
 
-    findByTitle() {
-        this.refreshData();
+    setActiveFile = async (file) => {
+        await this.props.setActiveFile(file.doc_no);
 
-        this.props.findFilesByTitle(this.state.searchTitle);
+        // await this.setState({
+        //   currentFile: file,
+        // });
     }
 
-    handleSelect(eventKey) {
-        this.props.findFilesByTitle(this.state.folders[eventKey]);
-        // console.log(displayFiles)
-        this.setState({
-            currentFolder: this.state.folders[eventKey]
-            // currentFileList: displayFiles
+    findByTitle = async () => {
+        await this.props.findFilesByTitle(this.state.searchTitle);
+
+        await this.setState({
+            currentFileList: this.props.currentFileList
         })
     }
 
     render() {
 
-        const { searchTitle, roots, subgrps, folders, currentFileList, currentFile, currentFileIndex, currentRoot, currentFolder, currentRootIndex } = this.state;
-        const { files } = this.props;
+        const { searchTitle, currentRoot, currentFolder, currentSubgrp, currentFileList } = this.state;
+        const { roots, subgrps, folders, currentFile } = this.props;
 
         return (
             <div className="list row">
@@ -156,18 +170,25 @@ class FileList extends Component {
                 <div className="col-md-6">
                     <h4>Files List</h4>
                     {/* <div className="container"> */}
-                        <Nav variant="tabs" activeKey={currentRoot} onSelect={(root, index) => this.setActiveRoot(root, index)}>
-                        {/* {files.roots.map((root, index) => ( */}
+                        <Nav variant="tabs" onSelect={this.setActiveRoot}>
+                        {roots &&
+                        roots.map((root, index) => (
                             <Nav.Item>
-                                <Nav.Link eventKey={currentRoot}>
-                                    {currentRoot}
+                               {/* {currentRoot ? ( */}
+                                <Nav.Link eventKey= {root, index}>
+                                    {root}
                                 </Nav.Link>
+                               {/* ) : (
+                                <Nav.Link eventKey= "">
+                                {root}
+                            </Nav.Link>
+                               )} */}
                             </Nav.Item>
-                        {/* ))} */}
+                        ))}
                         </Nav>
                         <div className="col-md-5">
-                            <Nav variant="tabs" activeKey={currentFolder} onSelect={this.handleSelect} className="folder-list">
-                            {/* <Nav justify variant="tabs" activeKey={folder} onSelect={(folder, index) => this.setActiveFolder(folder, index)} className="folder-list"> */}
+                            {/* <Nav variant="tabs" activeKey={currentFolder} onSelect={this.handleSelect} className="folder-list"> */}
+                            <Nav variant="tabs" onSelect={this.setActiveFolder} className="folder-list">
                                 {folders &&
                                 folders.map((folder, index) => (
                                 <Nav.Item>
@@ -180,27 +201,31 @@ class FileList extends Component {
                         </div>  
                         <div className="container">
                         <div className="col-md-2">
-                        <Nav variant="tabs" activeKey={currentFolder} onSelect={(folder, index) => this.setActiveFolder(folder, index)} className="folder-list">
-                            <Nav.Item>
-                                <Nav.Link eventKey={currentFolder}>
-                                    {subgrps[0]}
+                        <Nav variant="tabs" onSelect={this.setActiveSubgrp} className="folder-list">
+                            {subgrps && 
+                            subgrps.map((subgrp, index) => (
+                                <Nav.Item>
+                                <Nav.Link eventKey={subgrp, index}>
+                                    {subgrp}
                                 </Nav.Link>
                             </Nav.Item>
+                            ))}
                         </Nav>
                         </div>                      
                         {/* </div>   */}
                         <div className="col-md-2">
                             <div className="file-list">
                     <ul className="list-group">
-                    {files &&
-                        // {currentFileList &&
-                        files.map((file, index) => (
+                    {/* {files && */}
+                        {currentFileList &&
+                        currentFileList.map((file, index) => (
+                            // files.map((file, index) => (
                             <li
                             className={
                                 "list-group-item " +
-                                (index === currentFileIndex ? "active" : "")
+                                (file === currentFile ? "active" : "")
                             }
-                            onClick={() => this.setActiveFile(file, index)}
+                            onClick={() => this.setActiveFile(file)}
                             key={index}
                             >
                             {file.doc_no}
@@ -210,13 +235,6 @@ class FileList extends Component {
                     </div>
                     </div>
                     </div>
-
-                    {/* <button
-                        className="m-3 btn btn-sm btn-danger"
-                        onClick={this.removeAllFiles}
-                    >
-                        Remove All
-                    </button> */}
                 </div>
                 <div className="col-md-6">
                     {currentFile ? (
@@ -259,7 +277,7 @@ class FileList extends Component {
                             <label>
                             <strong>Download Document:</strong>
                             </label>{" "}
-                            <a href={"../../public/files/" + currentFile.doc} download>
+                            <a href={"../../public/files/" + currentFile.doc_no} download>
                             {currentFile.doc}
                             </a>
                         </div>
@@ -286,12 +304,12 @@ class FileList extends Component {
                             ) : ( <div/> )}
                         </div>
                     {/* missing title (actual), doc_cat, doc_type, effective date*/}
-                        <Link
+                        {/* <Link
                             to={"/files/" + currentFile.id}
                             className="badge badge-warning"
                         >
                             Edit
-                        </Link>
+                        </Link> */}
                         </div>
                     ) : (
                         <div>
@@ -299,7 +317,7 @@ class FileList extends Component {
                         {/* <p>Please click on a file...</p> */}
                         </div>
                     )}
-                </div>
+                </div>            
             </div>
             // </div>
         );
@@ -307,9 +325,21 @@ class FileList extends Component {
 }
 
 const mapStateToProps = (state) => {
+    // console.log(state)
+
     return {
-        files: state.files
+        files: state.files.files, // grabbing the files state from the reducer
+        roots: state.files.roots,
+        folders: state.files.folders,
+        subgrps: state.files.subgrps,
+        currentFile: state.files.currentFile,
+        currentFileList: state.files.currentFileList,
+        // currentFile: state.files.find(file => file == this.state.currentFile),
+        // currentFile: state.currentFile,
+        // currentRoot: state.currentRoot,
+        // currentFolder: state.currentFolder,
+        // searchTitle: state.searchTitle,
     };
 };
 
-export default connect(mapStateToProps, { retrieveFiles, findFilesByTitle, deleteAllFiles }) (FileList)
+export default connect(mapStateToProps, { retrieveFiles, setActiveFile, findFilesByTitle }) (FileList)
