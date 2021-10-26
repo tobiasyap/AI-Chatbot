@@ -1,39 +1,72 @@
 // Interact with chatbot
 
 import React, { Component } from "react";
+// import { Link } from "react-router-dom";
+// import { Link } from "react-bootstrap";
 import { connect } from "react-redux";
+// import { update } from "../../../backend/app/controllers/filesystem.controller";
 import { getModel } from "../actions/chatbot";
+import { setActiveFile } from "../actions/files";
+// import { store } from "../store"
 // import { Link } from "react-router-dom";
 // import { Container, Nav } from "react-bootstrap"
 
 class Chatbot extends Component {
     constructor(props) {
         super(props);
-        // this.updateQuery = this.updateQuery.bind(this);
+        this.selectFile = this.selectFile.bind(this);
+        this.updateDone = this.updateDone.bind(this);
         // this.refreshData = this.refreshData.bind(this);
         // this.getReply = this.getReply.bind(this);
         this.state = {
             query: "",
-            // count: 0
-            reply: null
+            done: false,
+            reply: []
         };
     }
 
-    componentDidMount() {
-        this.props.getModel(this.props.steps.query.message);        
-        console.log(this.props)
-        const docsLength = this.props.chatbot.length
-        const docs = this.props.chatbot
-        console.log(docsLength)
-        const modelReply = docs[docsLength]
-        console.log(modelReply)
-        this.setState({
-            reply: modelReply
+    async componentDidMount() {
+        await this.props.getModel(this.props.steps.query.message)
+        const positive = this.props.results ? true : false
+        const results = this.props.results.length > 0 ? this.props.results : []
+
+        await this.setState({
+            reply: results,
+            done: positive
+        })
+
+        // const xhr = new XMLHttpRequest();
+        // const self = this;
+        // function readyStateChange() {
+        //     console.log(this.readyState)
+        //     if (this.readyState === 4) {
+        //         if (self.props.results.length > 0) {
+        //             self.setState({
+        //                 done: true,
+        //                 reply: this.props.results
+        //             })
+        //         }
+        //     }
+        // }
+        // xhr.addEventListener('readystatechange', readyStateChange);
+        // xhr.send()
+
+        // this.updateDone();
+        this.props.triggerNextStep();
+    }
+
+    async selectFile(file) {
+        await this.props.setActiveFile(file['Document ID'])
+    }
+
+    async updateDone() {
+        await this.setState({
+            done: false
         })
     }
 
-    updateQuery(e) {
-        this.setState({
+    async updateQuery(e) {
+        await this.setState({
             query: e.target.value
         });
     }
@@ -49,18 +82,18 @@ class Chatbot extends Component {
 
     // }
 
-    async getReply() {
-        // this.refreshData()
-        await this.props.getModel(this.state.query);
-        console.log(this.props);
-        const result = this.props.chatbot
-        const files = result[result.length]
-        this.setState({
-            // count: this.state.count + 1,
-            reply: files
-        });
-        // console.log(this.state.reply)
-    }
+    // async getReply() {
+    //     // this.refreshData()
+    //     await this.props.getModel(this.state.query);
+    //     console.log(this.props);
+    //     const result = this.props.chatbot
+    //     const files = result[result.length]
+    //     this.setState({
+    //         // count: this.state.count + 1,
+    //         reply: files
+    //     });
+    //     // console.log(this.state.reply)
+    // }
 
     // async refreshData() {
     //     this.setState()
@@ -68,8 +101,8 @@ class Chatbot extends Component {
     // }
 
     render() {
-        const { reply } = this.state;
-        // const { query } = this.props;
+        const { reply, done } = this.state;
+        // const { results } = this.props;
 
         return (
             <div>
@@ -79,29 +112,37 @@ class Chatbot extends Component {
                 <button type="button" onClick={this.getReply}>Ask</button> */}
 
                 <div>
-                    {this.props.chatbot[0] ? ( 
+                    {done ? ( 
                     <div>
-                        These are likely the documents you are looking for:
+                        {reply.length > 0 ? (
+                            <div>
+                            These are likely the documents you are looking for:
                         <ul>
-                         {this.props.chatbot[0] && 
-                            this.props.chatbot[0].map((res, index) => (
-                            <li key={index}>
+                         {reply && 
+                            reply.map((res, index) => (
+                                <li>
+                                 {/* <ListGroupItem href="#" key={index} onClick={() => this.selectFile(res)}>  */}
+                                <li className='link' href="#" key={index} onClick={() => this.selectFile(res)}> 
                                 {res['Document Description']}
-                            </li>
-                        ))}
-                    </ul>
+                                </li>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>) : (
+                    <div> Sorry, I couldn't find anything. Could you enter a more specific query? </div> ) }
                 </div>
-                  ) : ( <br/> )} 
-                </div>
+                    ) : ( <div> Loading... </div> )} 
             </div>
+        </div>
         );
     }
 }
 
 const mapStateToProps = (state) => {
+    // console.log(state)
     return {
-        chatbot: state.chatbot
+        results: state.chatbot.results,
     };
 };
 
-export default connect(mapStateToProps, { getModel } )(Chatbot)
+export default connect(mapStateToProps, { getModel, setActiveFile } )(Chatbot)

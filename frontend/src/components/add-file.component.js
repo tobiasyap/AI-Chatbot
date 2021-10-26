@@ -69,7 +69,7 @@ const AddFile = () => {
               <input type="file" name="doc" id="customFile" class="custom-file-input"></input>
               <label for="customFile" class="custom-file-label">Choose File</label>
             </div>
-            <input type="submit" value="Submit" class="btn btn-primary btn-block mb-3"></input>
+            <input type="submit" value="Submit" class="btn btn-block mb-3"></input>
           </form>
         </div>
       </div>

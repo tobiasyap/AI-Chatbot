@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ChatBot from 'react-simple-chatbot';
 import ChatbotComponent from './chatbot.component';
 import { ThemeProvider } from "styled-components";
+// import { connect } from "react-redux"
 import botAvatar from "../bot.png";
 // import userAvatar from ".png";
 
@@ -23,7 +24,25 @@ const config ={
   };
 
 class AIChatBot extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      results: []
+      // selectFile: null
+    }
+  }
+
+  // async componentDidMount() {
+  //   // await this.setState({
+  //   //   selectFile: this.props.setActiveFile
+  //   // })
+  //   console.log(this.props)
+  //   // console.log(this.state)
+  // }
+
   render() {
+    // const { selectFile } = this.state;
+
     return (
       <ThemeProvider theme={theme}>
       <ChatBot 
@@ -52,15 +71,22 @@ class AIChatBot extends Component {
          {
            id:'ans',
            component: <ChatbotComponent />,
+           waitAction: true,
+          //  delay: 100,
            asMessage:true,
-           trigger: 'more'
+           trigger: 'query'
          },
-         {
-           id:'more',
-           message:'Hope I answered your question!',
-           delay: 5,
-           trigger:'query'
-         },
+        //  {
+        //    id:'return',
+        //    message: {previousValue},
+        //    trigger: 'query'
+        //  }
+        //  {
+        //    id:'more',
+        //    message:'Hope I answered your question!',
+        //    delay: 5,
+        //    trigger:'query'
+        //  },
         //  {
         //    id:'options',
         //    options: [
@@ -81,5 +107,11 @@ class AIChatBot extends Component {
   }
        
 }
+// const mapStateToProps = (state) => {
+//   return {
+//     results: state.chatbot.results
+//   }
+// }
 
 export default AIChatBot;
+// export default connect(mapStateToProps) (AIChatBot);
