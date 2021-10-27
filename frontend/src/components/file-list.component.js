@@ -205,7 +205,7 @@ class FileList extends Component {
                         </Nav>
                         </div>                      
                         {/* </div>   */}
-                        <div className="col-md-2">
+                        <div className="col-md-2" >
                             <div className="file-list">
                     <ul className="list-group">
                     {/* {files && */}
@@ -220,7 +220,7 @@ class FileList extends Component {
                             onClick={() => this.setActiveFile(file)}
                             key={index}
                             >
-                            {file.doc_no}
+                            {file.metadata.title}
                             </li>
                         ))}
                     </ul>
