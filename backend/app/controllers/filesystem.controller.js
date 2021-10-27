@@ -2,10 +2,12 @@
 
 const db = require("../models");
 const File = db.filesystem;
+const {spawn} = require('child_process')
 
 // Create and Save a new Document
 exports.create = (req, res) => {
     // Validate request
+    console.log("hello");
     if (!req.body.parent) {
       res.status(400).send({ message: "Content can not be empty!" });
       return;
@@ -36,6 +38,19 @@ exports.create = (req, res) => {
             err.message || "Some error occurred while creating the File."
         });
       });
+      
+      try {
+        console.log(req.body);
+        const python = spawn('python3', process.cwd() + '/nlp-model/update_tfidf_corpus.py')
+        python.stderr.on('data', function(data) {
+          console.log("There is an error!");
+          console.log(Buffer.from(data, 'utf-8').toString());
+        })
+      }
+      catch(err) {
+        console.log(err);
+        reject('failed to load python model');
+      }
   };
 
 // Create and save all Documents
