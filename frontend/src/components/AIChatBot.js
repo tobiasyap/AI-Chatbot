@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ChatBot from 'react-simple-chatbot';
 import ChatbotComponent from './chatbot.component';
+import FeedbackComponent from './feedback.component';
 import { ThemeProvider } from "styled-components";
 // import { connect } from "react-redux"
 import botAvatar from "../bot.png";
@@ -32,17 +33,7 @@ class AIChatBot extends Component {
     }
   }
 
-  // async componentDidMount() {
-  //   // await this.setState({
-  //   //   selectFile: this.props.setActiveFile
-  //   // })
-  //   console.log(this.props)
-  //   // console.log(this.state)
-  // }
-
   render() {
-    // const { selectFile } = this.state;
-
     return (
       <ThemeProvider theme={theme}>
       <ChatBot 
@@ -72,33 +63,39 @@ class AIChatBot extends Component {
            id:'ans',
            component: <ChatbotComponent />,
            waitAction: true,
-          //  delay: 100,
            asMessage:true,
-           trigger: 'query'
+           trigger: 'more'
          },
         //  {
         //    id:'return',
         //    message: {previousValue},
         //    trigger: 'query'
         //  }
-        //  {
-        //    id:'more',
-        //    message:'Hope I answered your question!',
-        //    delay: 5,
-        //    trigger:'query'
-        //  },
-        //  {
-        //    id:'options',
-        //    options: [
-        //      {value: 'y', label:'Yes', trigger:'query'},
-        //      {value: 'n', label:'No', trigger:'end'}
-        //    ]
-        //  },
-        //  {
-        //    id:'end',
-        //    message:'Alright, have a great day ahead!',
-        //    trigger: 'query'
-        //  }
+         {
+           id:'more',
+           message:'Did I answer your question?',
+          //  delay: 5,
+           trigger:'options'
+         },
+         {
+           id:'options',
+           options: [
+             {value: 'y', label:'Yes', trigger:'log'},
+             {value: 'n', label:'No', trigger:'feedback'}
+           ]
+         },
+         {
+           id:'feedback',
+           message: 'Could you tell me more about what you have searched and what you were expecting?',
+           user: true,
+           trigger: 'log'
+         }, 
+         {
+           id:'log',
+           message: 'Thank you for your feedback!',
+          //  component: <FeedbackComponent />,
+           trigger: 'query'
+         }
          ]}
          {...config}
       />
@@ -107,11 +104,5 @@ class AIChatBot extends Component {
   }
        
 }
-// const mapStateToProps = (state) => {
-//   return {
-//     results: state.chatbot.results
-//   }
-// }
 
 export default AIChatBot;
-// export default connect(mapStateToProps) (AIChatBot);

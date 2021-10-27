@@ -8,6 +8,7 @@ import File from "./components/file.component";
 import AddFile from "./components/add-file.component";
 import FileList from "./components/file-list.component";
 import AIChatBot from "./components/AIChatBot";
+import Acronyms from "./components/Acronyms";
 
 class App extends Component {
   render() {
@@ -37,6 +38,10 @@ class App extends Component {
           <Route exact path={"/add"} component={AddFile} />
           <Route exact path={"/files/:id"} component={File} />
           </Switch>
+        </div>
+
+        <div>
+          <Acronyms />
         </div>
 
         <div>

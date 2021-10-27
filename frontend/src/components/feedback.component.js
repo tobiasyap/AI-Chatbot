@@ -2,16 +2,13 @@
 
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getModel } from "../actions/chatbot";
-import { setActiveFile } from "../actions/files";
+import { postFeedback } from "../actions/chatbot";
 
-class Chatbot extends Component {
+class Feedback extends Component {
     constructor(props) {
         super(props);
-        this.selectFile = this.selectFile.bind(this);
-        this.updateDone = this.updateDone.bind(this);
-        // this.refreshData = this.refreshData.bind(this);
-        // this.getReply = this.getReply.bind(this);
+        // this.selectFile = this.selectFile.bind(this);
+        // this.updateDone = this.updateDone.bind(this);
         this.state = {
             query: "",
             done: false,
@@ -20,13 +17,13 @@ class Chatbot extends Component {
     }
 
     async componentDidMount() {
-        await this.props.getModel(this.props.steps.query.message)
-        const positive = this.props.results ? true : false
-        const results = this.props.results.length > 0 ? this.props.results : []
+        // await this.props.getModel(this.props.steps.query.message)
+        // const positive = this.props.results ? true : false
+        // const results = this.props.results.length > 0 ? this.props.results : []
 
         await this.setState({
-            reply: results,
-            done: positive
+            // reply: results,
+            // done: positive
         })
 
         // const xhr = new XMLHttpRequest();
@@ -50,7 +47,7 @@ class Chatbot extends Component {
     }
 
     async selectFile(file) {
-        await this.props.setActiveFile(file['Document ID'])
+        // await this.props.setActiveFile(file['Document ID'])
     }
 
     async updateDone() {
@@ -146,4 +143,4 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, { getModel, setActiveFile } )(Chatbot)
+// export default connect(mapStateToProps, { getModel, setActiveFile } )(Feedback)
