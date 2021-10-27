@@ -3,9 +3,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { retrieveFiles, setActiveFile, findFilesByTitle } from "../actions/files";
-import { Link } from "react-router-dom";
-import { Container, Nav } from "react-bootstrap"
-import AIChatBot from "./AIChatBot";
+import { Nav } from "react-bootstrap"
+import acronyms from "./Acronyms"
 
 class FileList extends Component {
     constructor(props) {
@@ -81,37 +80,30 @@ class FileList extends Component {
     //     });
     // }
 
-    setActiveRoot = async (rootIndex) => {
-        const root = this.props.roots[rootIndex];
-        // const displayFiles = this.props.files.files.filter(doc => doc.metadata.grp === root);
+    setActiveRoot = async (root) => {
         await this.setState({
           currentRoot: root,
           currentFolder: null,
           currentSubgrp: null
         });
         this.getDisplayFiles()
-        console.log(this.state.currentFileList)
     }
 
-    setActiveFolder = async (folderIndex) => {
-        const folder = this.props.folders[folderIndex];
-        // const displayFiles = this.props.files.files.filter(doc => doc.doc_no.includes(folder));
+    setActiveFolder = async (folder) => {
+        // const folder = this.props.folders[folderIndex];
         await this.setState({
           currentFolder: folder,
           currentSubgrp: null
         });
-        console.log(this.state);
         this.getDisplayFiles()
     }
 
-    setActiveSubgrp = async (subgrpIndex) => {
-        const subgrp = this.props.subgrps[subgrpIndex];
-        // const displayFiles = this.props.files.files.filter(doc => doc.parent == subgrp);
+    setActiveSubgrp = async (subgrp) => {
+        // const subgrp = this.props.subgrps[subgrpIndex];
         await this.setState({
           currentSubgrp: subgrp,
         });
         this.getDisplayFiles()
-        console.log(this.state.currentFileList)
     }
 
     getDisplayFiles = async () => {
@@ -142,7 +134,7 @@ class FileList extends Component {
 
     render() {
 
-        const { searchTitle, currentRoot, currentFolder, currentSubgrp, currentFileList } = this.state;
+        const { searchTitle, currentFileList } = this.state;
         const { roots, subgrps, folders, currentFile } = this.props;
 
         return (
@@ -172,10 +164,10 @@ class FileList extends Component {
                     {/* <div className="container"> */}
                         <Nav variant="tabs" onSelect={this.setActiveRoot}>
                         {roots &&
-                        roots.map((root, index) => (
+                        roots.map((root) => (
                             <Nav.Item>
                                {/* {currentRoot ? ( */}
-                                <Nav.Link eventKey= {root, index}>
+                                <Nav.Link eventKey= {root}>
                                     {root}
                                 </Nav.Link>
                                {/* ) : (
@@ -190,9 +182,9 @@ class FileList extends Component {
                             {/* <Nav variant="tabs" activeKey={currentFolder} onSelect={this.handleSelect} className="folder-list"> */}
                             <Nav variant="tabs" onSelect={this.setActiveFolder} className="folder-list">
                                 {folders &&
-                                folders.map((folder, index) => (
+                                folders.map((folder) => (
                                 <Nav.Item>
-                                <Nav.Link eventKey={folder, index}>
+                                <Nav.Link eventKey={folder}>
                                     {folder}
                                 </Nav.Link>
                             </Nav.Item>
@@ -203,9 +195,9 @@ class FileList extends Component {
                         <div className="col-md-2">
                         <Nav variant="tabs" onSelect={this.setActiveSubgrp} className="folder-list">
                             {subgrps && 
-                            subgrps.map((subgrp, index) => (
+                            subgrps.map((subgrp) => (
                                 <Nav.Item>
-                                <Nav.Link eventKey={subgrp, index}>
+                                <Nav.Link eventKey={subgrp}>
                                     {subgrp}
                                 </Nav.Link>
                             </Nav.Item>
@@ -277,8 +269,9 @@ class FileList extends Component {
                             <label>
                             <strong>Download Document:</strong>
                             </label>{" "}
-                            <a href={"../../public/files/" + currentFile.doc_no} download>
-                            {currentFile.doc}
+                            <a href="./files/Project Charter Sample.doc" download="Project Charter Sample.doc"> 
+                            {/* <a href={"./files/" + currentFile.doc_no + ".doc"} download={currentFile.doc_no + ".doc"}>  */}
+                            {currentFile.doc_no} 
                             </a>
                         </div>
                         <div>
@@ -318,6 +311,15 @@ class FileList extends Component {
                         </div>
                     )}
                 </div>            
+                {/* <div>
+                    <ul>
+                        {acronyms && acronyms.map((acr, desc) => (
+                        <li key={acr}>
+                            {acr}: {desc}
+                        </li>
+                        ))}
+                    </ul>
+                </div> */}
             </div>
             // </div>
         );
@@ -325,8 +327,6 @@ class FileList extends Component {
 }
 
 const mapStateToProps = (state) => {
-    // console.log(state)
-
     return {
         files: state.files.files, // grabbing the files state from the reducer
         roots: state.files.roots,

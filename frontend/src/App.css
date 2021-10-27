@@ -29,6 +29,15 @@ a {
    cursor: pointer;
 }
 
+.info {
+  display: none;
+}
+
+.list-link:hover .info {
+  display: block;
+  font-size: 12px;
+}
+
 .input {
   min-width: 500px;
 }
@@ -50,6 +59,10 @@ a {
 
 .navbar {
   background-color: #014282
+}
+
+.list-group-item:hover {
+  cursor: pointer;
 }
 
 .list-group-item.active{
