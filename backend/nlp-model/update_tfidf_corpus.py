@@ -1,14 +1,16 @@
 import os
-import textract
+# import textract
 import numpy as np # linear algebra
 import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
 import spacy
 import string
 import gensim
-import operator
 import re
 from spacy.lang.en.stop_words import STOP_WORDS
-
+import tika
+#tika.initVM() # initialize Java server
+tika.TikaClientOnly = True
+from tika import parser
 
 def spacy_tokenizer(sentence):
  
@@ -44,7 +46,6 @@ def spacy_tokenizer(sentence):
     #return tokens
     return tokens
 
-
 spacy_nlp = spacy.load('en_core_web_sm')
 
 #create list of punctuations and stopwords
@@ -52,18 +53,20 @@ punctuations = string.punctuation
 stop_words = spacy.lang.en.stop_words.STOP_WORDS
 
 ##FILE STORAGE DIRECTORY
-#source_directory = "../../../files/"
-source_directory = "C:/Users/Admin/Documents/NUS/Y4S1/BT4103/nodejs-express-mongodb/files"
+source_directory = os.path.abspath(__file__ + "/../../../files/")
 
 data, docs = [], []
 for i in os.listdir(source_directory):
-    if i[-3:] != "doc" and i[-4:] != "docx":
+    if i[-3:] != "doc" and i[-4:] != "docx" or i[0] == "~":
         continue
     lst = [i.split('.doc')[0]]
     # print(lst)
-    text = textract.process(source_directory + "/" + i)
+    # text = textract.process(source_directory + "/" + i)
+    #parsed = parser.from_file(source_directory+"/"+ i, 'http://localhost:1234/')
+    parsed = parser.from_file(source_directory+"/"+ i, 'http://localhost:41000/')
+    text = parsed["content"]
     # text = textract.process(i)
-    text = text.decode("utf-8")
+    # text = text.decode("utf-8")
     name = lst[0]
     temp = text.split(name.replace('_','/').replace('V','/').replace('//','/').replace(' ',''))
     if len(temp) > 2:
@@ -80,6 +83,7 @@ for i in os.listdir(source_directory):
     lst[1] = re.sub(' +', ' ', lst[1])
     lst[1] = lst[1].lower()
     lst[1] = lst[1].strip()
+    print(f'processed {i}')
     data.append(lst)
     if len(lst) > 3:
         print(i)
@@ -143,7 +147,6 @@ def convert_doc(row):
   return doc
 
 docs = df2.apply(lambda x: convert_doc(x), axis=1)
-
 
 ##Create Dictionary
 #get clean text to be used in dictionary
