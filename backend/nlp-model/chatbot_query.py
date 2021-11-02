@@ -102,7 +102,7 @@ def search_document(search_term, N=5):
             {
                 "Relevance": round((doc[1] * 100),2),
                 "Document ID": df1.loc[doc[0]]["doc_no"],
-                "Document Description": df1.loc[doc[0]]["metadata"]["title"]
+                "Document Description": df1.loc[doc[0]]["title"]
             }
         )
         if j == (chatbot_tfidf_index.num_best-1):
