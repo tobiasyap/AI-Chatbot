@@ -3,7 +3,6 @@ import ChatBot from 'react-simple-chatbot';
 import ChatbotComponent from './chatbot.component';
 import FeedbackComponent from './feedback.component';
 import { ThemeProvider } from "styled-components";
-import FeedbackComponent from './feedback.component';
 // import { connect } from "react-redux"
 import botAvatar from "../bot.png";
 // import userAvatar from ".png";
