@@ -125,11 +125,11 @@ class Chatbot extends Component {
                                             {/* {res['Document ID']} */}
                                         <div class='link'>
                                         <strong>
-                                            {res['Document ID']}
+                                            {res['Document Description']}
                                         </strong>
                                         </div>
                                     <div className='info'>
-                                        {res['Document Description']}
+                                        {res['Document ID']}
                                     </div>
                                     </li>
                                 </div>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ChatBot from 'react-simple-chatbot';
 import ChatbotComponent from './chatbot.component';
 import { ThemeProvider } from "styled-components";
+import FeedbackComponent from './feedback.component';
 // import { connect } from "react-redux"
 import botAvatar from "../bot.png";
 // import userAvatar from ".png";
@@ -68,18 +69,18 @@ class AIChatBot extends Component {
           // },
           trigger:'ans'
          },
-        //  {
-        //    id:'ans',
-        //    component: <ChatbotComponent />,
-        //    waitAction: true,
-        //    asMessage:true,
-        //    trigger: 'more'
-        //  },
          {
            id:'ans',
-           message: 'rem to unblock code',
+           component: <ChatbotComponent />,
+           waitAction: true,
+           asMessage:true,
            trigger: 'more'
          },
+        //  {
+        //    id:'ans',
+        //    message: 'rem to unblock code',
+        //    trigger: 'more'
+        //  },
          {
            id:'more',
            message:'Did I answer your question?',
@@ -89,21 +90,31 @@ class AIChatBot extends Component {
          {
            id:'options',
            options: [
-             {value: 'y', label:'Yes', trigger:'log'},
+             {value: 'y', label:'Yes', trigger:'endfeedback'},
              {value: 'n', label:'No', trigger:'feedback'}
            ]
          },
          {
            id:'feedback',
            message: 'Could you tell me more about what you have searched and what you were expecting?',
-           user: true,
            trigger: 'log'
          }, 
          {
-           id:'log',
-           message: 'Thank you for your feedback!',
+          id:'log',
+          user: true,
+          trigger: 'endfeedback'
+        }, 
+         {
+           id:'endfeedback',
            component: <FeedbackComponent />,
-           trigger: 'query'
+           waitAction: true,
+           asMessage:true,
+           trigger: 'test'
+         },
+         {
+           id:'test',
+           user:true,
+           trigger:'query'
          }
          ]}
          {...config}

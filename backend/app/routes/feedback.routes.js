@@ -6,9 +6,9 @@
     var router = require("express").Router();
   
     // Create a new file
-    router.post("/feedback", feedback.getFeedback);
+    router.post("/feedback", feedback.postFeedback);
   
     // Retrieve a single file with title
     // router.get("/files?title=:title", filesystem.findAll);
-    app.use('/api/feedback', router);
+    app.use('/api', router);
   }

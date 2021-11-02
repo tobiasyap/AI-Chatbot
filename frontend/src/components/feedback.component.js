@@ -17,9 +17,25 @@ class Feedback extends Component {
     }
 
     async componentDidMount() {
-        // await this.props.getModel(this.props.steps.query.message)
+        try { 
+            await this.props.postFeedback({
+                boolean: 'Yes',
+                feedback: this.props.steps.log.message,
+                user_query: this.props.steps.query.message
+              })
+        }
+        catch(err) {
+            await this.props.postFeedback({
+                boolean: 'No',
+                user_query: this.props.steps.query.message
+              })
+        }
+        this.props.triggerNextStep();
+
+        
         // const positive = this.props.results ? true : false
         // const results = this.props.results.length > 0 ? this.props.results : []
+        // console.log(this.props.steps)
 
         await this.setState({
             // reply: results,
@@ -96,43 +112,8 @@ class Feedback extends Component {
         // const { results } = this.props;
 
         return (
-            <div>
-                {/* <input placeholder="Enter query:" value={query}
-                        className="input"
-                        onChange={this.updateQuery}/>
-                <button type="button" onClick={this.getReply}>Ask</button> */}
-
-                <div>
-                    {done ? ( 
-                    <div>
-                        {reply.length > 0 ? (
-                            <div>
-                            These are likely the documents you are looking for:
-                        <ol>
-                         {reply && 
-                            reply.map((res, index) => (    
-                                <div>   
-                                    <li class='list-link' href="#" key={index} onClick={() => this.selectFile(res)}> 
-                                            {/* {res['Document ID']} */}
-                                        <div class='link'>
-                                        <strong>
-                                            {res['Document ID']}
-                                        </strong>
-                                        </div>
-                                    <div className='info'>
-                                        {res['Document Description']}
-                                    </div>
-                                    </li>
-                                </div>
-                            ))}
-                        </ol>
-                    </div>) : (
-                    <div> Sorry, I couldn't find anything. Could you enter a more specific query? </div> ) }
-                </div>
-                    ) : ( <div> Loading... </div> )} 
-            </div>
-        </div>
-        );
+            <div>Thank you for your feedback!</div>
+        )
     }
 }
 

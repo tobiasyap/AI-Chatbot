@@ -1,5 +1,5 @@
 import {
-    GET_FEEDBACK
+    POST_FEEDBACK
 } from "./types";
 
 import FeedbackDataService from "../services/feedback.service";
@@ -7,17 +7,18 @@ import FeedbackDataService from "../services/feedback.service";
 // calls ChatbotDataService.getModel() and dispatches GET_MODEL
 export const postFeedback = (feedback) => async (dispatch) => {
     try {
-      const res = await FeedbackDataService.getFeedback({feedback});
+      const res = await FeedbackDataService.postFeedback(feedback);
       // console.log("Received response", res)
       console.log(res)
   
       dispatch({
-        type: GET_FEEDBACK,
+        type: POST_FEEDBACK,
         payload: res.data,
       });
 
       return Promise.resolve(res.data);
     } catch (err) {
+      // console.log('actions feedback')
       return Promise.reject(err);
     }
   };

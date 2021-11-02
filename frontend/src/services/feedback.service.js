@@ -3,8 +3,8 @@
 import http from "../http-common";
 
 class FeedbackDataService {
-    getFeedback(feedback) {
-      return http.post("chatbot/feedback", feedback);
+    postFeedback(feedback) {
+      return http.post("/feedback", feedback);
     }
 }
 

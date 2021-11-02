@@ -1,5 +1,6 @@
 import {
-    GET_MODEL
+    GET_MODEL,
+    POST_FEEDBACK,
 } from "../actions/types";
   
 const initState = {
@@ -18,6 +19,13 @@ function chatbotReducer(state = initState, action) {
           ...state,
           results: payload
         }
+        
+        case POST_FEEDBACK:
+          console.log(payload)
+          return{
+            ...state,
+            results: payload
+          }
         // return [...state, payload];
   
       default:
