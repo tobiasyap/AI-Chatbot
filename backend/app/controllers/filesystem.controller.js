@@ -7,35 +7,27 @@ const {spawn} = require('child_process')
 // Create and Save a new Document
 exports.create = (req, res) => {
     // Validate request
-    if (!req.body.parent) {
+    if (!req.body.title) {
       res.status(400).send({ message: "Content can not be empty!" });
       return;
     }
 
     // Create a new document by creating an instance of the model
     const file = new File({
-      doc_no:  req.body.doc_no,
-      parent: req.body.parent, // null if root folder
-      doc: req.body.doc,
-      metadata: req.body.metadata
+      title: req.body.title,       
+      doc_cat: req.body.doc_cat,    
+      doc_type: req.body.doc_type,   
+      doc_no: req.body.doc_no,      
+      doc: req.body.doc,       
+      grp: req.body.grp,        
+      subgrp: req.body.subgrp,   
+      created: req.body.created,     
+      revision_no: req.body.revision_no,
+      text: req.body.text      
     });
 
     if(req.file) {
       file.doc = req.file.filename
-    }
-
-    // Update corpus
-    try {
-      console.log('python', process.cwd() + '/nlp-model/update_tfidf_corpus.py')
-      // Mac users change below code to python3
-      const python = spawn('python', [process.cwd() + "/nlp-model/update_tfidf_corpus.py"])
-      python.stderr.on('data', function(data) {
-        console.log("There is an error!");
-        console.log(Buffer.from(data, 'utf-8').toString());
-      })
-    }
-    catch(err) {
-      console.log(err);
     }
 
     // Save File in the database
@@ -51,12 +43,26 @@ exports.create = (req, res) => {
             err.message || "Some error occurred while creating the File."
         });
       });
+
+    // Update corpus with newly saved file
+    try {
+      console.log('python', process.cwd() + '/nlp-model/update_tfidf_corpus.py')
+      // Mac users change below code to python3
+      const python = spawn('python', [process.cwd() + "/nlp-model/update_tfidf_corpus.py"])
+      python.stderr.on('data', function(data) {
+        console.log("There is an error!");
+        console.log(Buffer.from(data, 'utf-8').toString());
+      })
+    }
+    catch(err) {
+      console.log(err);
+    }
   };
 
 // Create and save all Documents
 exports.createAll = (req, res) => {
     // Validate request
-    if (!req.body.parent) {
+    if (!req.body.title) {
       res.status(400).send({ message: "Content can not be empty!" });
       return;
     }

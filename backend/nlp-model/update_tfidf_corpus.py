@@ -60,9 +60,7 @@ for i in os.listdir(source_directory):
     if i[-3:] != "doc" and i[-4:] != "docx" or i[0] == "~":
         continue
     lst = [i.split('.doc')[0]]
-    # print(lst)
     # text = textract.process(source_directory + "/" + i)
-    #parsed = parser.from_file(source_directory+"/"+ i, 'http://localhost:1234/')
     parsed = parser.from_file(source_directory+"/"+ i, 'http://localhost:41000/')
     text = parsed["content"]
     # text = textract.process(i)
@@ -131,18 +129,19 @@ def convert_doc(row):
   parent = list(filter(lambda x: x.isalpha(), parts[::-1]))[0]
   # get document: currently missing cols doc_cat, doc_type, doc_no, sub_grp (same as parent), created date, revision_no. (version)
   doc = {
-      "doc_no": parts_no,
-      "parent": parent, 
-         "metadata": {
-            "title": row['document_name'],  # actual title should be scraped from eQMS
-            "doc": row['document_id'] + ".docx", # should be actual file
-            "grp": parts[0], 
-            "subgrp": parent,
-          }, 
-         "text": spacy_tokenizer(row['word_text'])
-         }
+      "title": row['document_name'],  # actual title should be scraped from eQMS      
+      # "doc_cat": ,    
+      # "doc_type": ,   
+      "doc_no": parts_no,      
+      "doc": row['document_id'] + ".docx", # should be actual file      
+      "grp": parts[0],         
+      "subgrp": parent,   
+      # "created": ,     
+      # "revision_no": ,
+      "text": spacy_tokenizer(row['word_text'])
+      }
   if versioned:
-    doc["metadata"]["revision_no"] = int(row['document_id'][-1])
+    doc["revision_no"] = int(row['document_id'][-1])
     doc["doc_no"] = parts_no[:-3]
   return doc
 

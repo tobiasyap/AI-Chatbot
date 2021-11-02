@@ -37,32 +37,29 @@ const AddFile = () => {
           { submitted && <div>Successfully submitted!</div> }
           { error && <div>Error submitting! Please try again :)</div> }
           <form onSubmit={onSubmit}>
-            <label for="parent" class="form-label">Parent:</label>
-            <input type="text" name="parent" class="form-control"></input>
+            <label for="title" class="form-label mt-3">Title:</label>
+            <input type="text" name="title" class="form-control"></input>
 
-            <label for="metadata[title]" class="form-label mt-3">Title:</label>
-            <input type="text" name="metadata[title]" class="form-control"></input>
-
+            <label for="doc_cat" class="form-label mt-3">Document Category:</label>
+            <input type="text" name="doc_cat" class="form-control"></input>
+            
+            <label for="doc_type" class="form-label mt-3">Document Type:</label>
+            <input type="text" name="doc_type" class="form-control"></input>
+            
             <label for="doc_no" class="form-label mt-3">Document Number:</label>
             <input type="text" name="doc_no" class="form-control"></input>
 
-            <label for="metadata[doc_cat]" class="form-label mt-3">Document Category:</label>
-            <input type="text" name="metadata[doc_cat]" class="form-control"></input>
+            <label for="grp" class="form-label mt-3">Group:</label>
+            <input type="text" name="grp" class="form-control"></input>
             
-            <label for="metadata[doc_type]" class="form-label mt-3">Document Type:</label>
-            <input type="text" name="metadata[doc_type]" class="form-control"></input>
-            
-            <label for="metadata[grp]" class="form-label mt-3">Group:</label>
-            <input type="text" name="metadata[grp]" class="form-control"></input>
-            
-            <label for="metadata[subgrp]" class="form-label mt-3">Subgroup:</label>
-            <input type="text" name="metadata[subgrp]" class="form-control"></input>
+            <label for="subgrp" class="form-label mt-3">Subgroup:</label>
+            <input type="text" name="subgrp" class="form-control"></input>
 
-            <label for="metadata[created]" class="form-label mt-3">Effective Date:</label>
-            <input type="date" name="metadata[created]" class="form-control"></input>
+            <label for="created" class="form-label mt-3">Effective Date:</label>
+            <input type="date" name="created" class="form-control"></input>
 
-            <label for="metadata[revision_no]" class="form-label mt-3">Revision Number:</label>
-            <input type="text" name="metadata[revision_no]" class="form-control"></input>
+            <label for="revision_no" class="form-label mt-3">Revision Number:</label>
+            <input type="text" name="revision_no" class="form-control"></input>
             
             <label for="file" class="form-label mt-3">File:</label>
             <div class="custom-file mb-3">
