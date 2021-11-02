@@ -3,6 +3,7 @@
 import string, json, re, os, sys
 ### To be changed
 sys.path.append("/Users/xuehui/opt/anaconda3/envs/nenv/lib/python3.9/site-packages")
+# sys.path.append("/System/Library/Frameworks/Python.framework/Versions/2.7/Resources/Python.app/Contents/MacOS/Python")
 # sys.path.append(dirname[:-9] + "venv/lib/python3.9/site-packages")
 
 import pandas as pd

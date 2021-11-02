@@ -68,37 +68,43 @@ class AIChatBot extends Component {
           // },
           trigger:'ans'
          },
+        //  {
+        //    id:'ans',
+        //    component: <ChatbotComponent />,
+        //    waitAction: true,
+        //    asMessage:true,
+        //    trigger: 'more'
+        //  },
          {
            id:'ans',
-           component: <ChatbotComponent />,
-           waitAction: true,
-          //  delay: 100,
-           asMessage:true,
-           trigger: 'query'
+           message: 'rem to unblock code',
+           trigger: 'more'
          },
-        //  {
-        //    id:'return',
-        //    message: {previousValue},
-        //    trigger: 'query'
-        //  }
-        //  {
-        //    id:'more',
-        //    message:'Hope I answered your question!',
-        //    delay: 5,
-        //    trigger:'query'
-        //  },
-        //  {
-        //    id:'options',
-        //    options: [
-        //      {value: 'y', label:'Yes', trigger:'query'},
-        //      {value: 'n', label:'No', trigger:'end'}
-        //    ]
-        //  },
-        //  {
-        //    id:'end',
-        //    message:'Alright, have a great day ahead!',
-        //    trigger: 'query'
-        //  }
+         {
+           id:'more',
+           message:'Did I answer your question?',
+          //  delay: 5,
+           trigger:'options'
+         },
+         {
+           id:'options',
+           options: [
+             {value: 'y', label:'Yes', trigger:'log'},
+             {value: 'n', label:'No', trigger:'feedback'}
+           ]
+         },
+         {
+           id:'feedback',
+           message: 'Could you tell me more about what you have searched and what you were expecting?',
+           user: true,
+           trigger: 'log'
+         }, 
+         {
+           id:'log',
+           message: 'Thank you for your feedback!',
+           component: <FeedbackComponent />,
+           trigger: 'query'
+         }
          ]}
          {...config}
       />
