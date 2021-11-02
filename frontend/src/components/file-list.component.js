@@ -4,7 +4,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { retrieveFiles, setActiveFile, findFilesByTitle } from "../actions/files";
 import { Nav } from "react-bootstrap"
-import acronyms from "./Acronyms"
 
 class FileList extends Component {
     constructor(props) {
@@ -71,7 +70,7 @@ class FileList extends Component {
     }
 
     // listFiles(files) {
-    //     const rootFolders = new Set(files.map(doc => doc.metadata.grp));
+    //     const rootFolders = new Set(files.map(doc => doc.grp));
     //     console.log(files);
     //     console.log(rootFolders);
     //     // [...rootFolders].reduce();
@@ -107,7 +106,7 @@ class FileList extends Component {
     }
 
     getDisplayFiles = async () => {
-        var displayFiles = this.state.currentRoot ? this.props.files.filter(doc => doc.metadata.grp === this.state.currentRoot) : this.props.files;
+        var displayFiles = this.state.currentRoot ? this.props.files.filter(doc => doc.grp === this.state.currentRoot) : this.props.files;
         displayFiles = this.state.currentFolder ? displayFiles.filter(doc => doc.doc_no.includes(this.state.currentFolder)) : displayFiles;
         displayFiles = this.state.currentSubgrp ? displayFiles.filter(doc => doc.parent === this.state.currentSubgrp) : displayFiles;
         await this.setState({
@@ -208,10 +207,8 @@ class FileList extends Component {
                         <div className="col-md-2" >
                             <div className="file-list">
                     <ul className="list-group">
-                    {/* {files && */}
                         {currentFileList &&
                         currentFileList.map((file, index) => (
-                            // files.map((file, index) => (
                             <li
                             className={
                                 "list-group-item " +
@@ -220,7 +217,7 @@ class FileList extends Component {
                             onClick={() => this.setActiveFile(file)}
                             key={index}
                             >
-                            {file.metadata.title}
+                            {file.title}
                             </li>
                         ))}
                     </ul>
@@ -236,26 +233,26 @@ class FileList extends Component {
                             <label>
                             <strong>Title:</strong>
                             </label>{" "}
-                            {currentFile.metadata.title}
+                            {currentFile.title}
                         </div>
                         <div>
                             <br/>
-                            {currentFile.metadata.doc_cat ? (
+                            {currentFile.doc_cat ? (
                             <div>
                                 <label>
                                 <strong>Document Category:</strong>
                                 </label>{" "}
-                                {currentFile.metadata.doc_cat}
+                                {currentFile.doc_cat}
                             </div>
                             ) : ( <div/> )}
                         </div>
                         <div>
-                            {currentFile.metadata.doc_type ? (
+                            {currentFile.doc_type ? (
                             <div>
                                 <label>
                                 <strong>Document Type:</strong>
                                 </label>{" "}
-                                {currentFile.metadata.doc_type}
+                                {currentFile.doc_type}
                             </div>
                             ) : ( <div/> )}
                         </div>
@@ -278,25 +275,24 @@ class FileList extends Component {
                             <label>
                             <strong>Group:</strong>
                             </label>{" "}
-                            {currentFile.metadata.grp}
+                            {currentFile.grp}
                         </div>                                                                                                
                         <div>
                             <label>
                             <strong>Sub Group:</strong>
                             </label>{" "}
-                            {currentFile.metadata.subgrp}
+                            {currentFile.subgrp}
                         </div>
                         <div>
-                            {currentFile.metadata.revision_no ? (
+                            {currentFile.revision_no ? (
                             <div>
                                 <label>
                                 <strong>Revision Number:</strong>
                                 </label>{" "}
-                                {currentFile.metadata.revision_no}
+                                {currentFile.revision_no}
                             </div>
                             ) : ( <div/> )}
                         </div>
-                    {/* missing title (actual), doc_cat, doc_type, effective date*/}
                         {/* <Link
                             to={"/files/" + currentFile.id}
                             className="badge badge-warning"
@@ -311,17 +307,7 @@ class FileList extends Component {
                         </div>
                     )}
                 </div>            
-                {/* <div>
-                    <ul>
-                        {acronyms && acronyms.map((acr, desc) => (
-                        <li key={acr}>
-                            {acr}: {desc}
-                        </li>
-                        ))}
-                    </ul>
-                </div> */}
             </div>
-            // </div>
         );
     }
 }
@@ -334,11 +320,7 @@ const mapStateToProps = (state) => {
         subgrps: state.files.subgrps,
         currentFile: state.files.currentFile,
         currentFileList: state.files.currentFileList,
-        // currentFile: state.files.find(file => file == this.state.currentFile),
-        // currentFile: state.currentFile,
-        // currentRoot: state.currentRoot,
-        // currentFolder: state.currentFolder,
-        // searchTitle: state.searchTitle,
+
     };
 };
 

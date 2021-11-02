@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ChatBot from 'react-simple-chatbot';
 import ChatbotComponent from './chatbot.component';
+import FeedbackComponent from './feedback.component';
 import { ThemeProvider } from "styled-components";
 import FeedbackComponent from './feedback.component';
 // import { connect } from "react-redux"
@@ -33,17 +34,7 @@ class AIChatBot extends Component {
     }
   }
 
-  // async componentDidMount() {
-  //   // await this.setState({
-  //   //   selectFile: this.props.setActiveFile
-  //   // })
-  //   console.log(this.props)
-  //   // console.log(this.state)
-  // }
-
   render() {
-    // const { selectFile } = this.state;
-
     return (
       <ThemeProvider theme={theme}>
       <ChatBot 
@@ -124,11 +115,5 @@ class AIChatBot extends Component {
   }
        
 }
-// const mapStateToProps = (state) => {
-//   return {
-//     results: state.chatbot.results
-//   }
-// }
 
 export default AIChatBot;
-// export default connect(mapStateToProps) (AIChatBot);

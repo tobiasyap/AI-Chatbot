@@ -1,15 +1,9 @@
 // Interact with chatbot
 
 import React, { Component } from "react";
-// import { Link } from "react-router-dom";
-// import { Link } from "react-bootstrap";
 import { connect } from "react-redux";
-// import { update } from "../../../backend/app/controllers/filesystem.controller";
 import { getModel } from "../actions/chatbot";
 import { setActiveFile } from "../actions/files";
-// import { store } from "../store"
-// import { Link } from "react-router-dom";
-// import { Container, Nav } from "react-bootstrap"
 
 class Chatbot extends Component {
     constructor(props) {

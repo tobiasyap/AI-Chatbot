@@ -6,7 +6,7 @@ const path = require('path');
 exports.getModel = (req, res) => {
       try {
           console.log(req.body);
-          const python = spawn('python3', [process.cwd() + '/nlp-model/testing_semantic_search_engine.py', req.body.query])
+          const python = spawn('python', [process.cwd() + '/nlp-model/chatbot_query.py', req.body.query])
           // var modelOutput = null;
           python.stdout.on('data', function (data) {            
             const modelOutput = JSON.parse(data);
