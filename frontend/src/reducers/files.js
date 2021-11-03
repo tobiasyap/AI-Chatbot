@@ -40,7 +40,7 @@ function fileReducer(state = initState, action) {
         }
   
       case RETRIEVE_FILES:
-        const subgrpList = Array.from(new Set(payload.map(file => file.parent)));
+        const subgrpList = Array.from(new Set(payload.map(file => file.subgrp)));
         const rootList = Array.from(new Set(payload.map(file => file.grp)));
         let folderLists = [];
         payload.forEach((file) => {

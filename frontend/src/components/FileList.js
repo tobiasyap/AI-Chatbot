@@ -87,7 +87,7 @@ class FileList extends Component {
         )
       : displayFiles;
     displayFiles = this.state.currentSubgrp
-      ? displayFiles.filter((doc) => doc.parent === this.state.currentSubgrp)
+      ? displayFiles.filter((doc) => doc.subgrp === this.state.currentSubgrp)
       : displayFiles;
     displayFiles.sort((a, b) => (a.title < b.title ? -1 : 1));
     await this.setState({
@@ -160,7 +160,7 @@ class FileList extends Component {
                     </div></div>
                   ))}
 
-                {/* parent nav */}
+                {/* subgrp nav */}
                 <div><div>
                 <Nav variant="tabs" onSelect={this.setActiveSubgrp}>
                   {subgrps &&
