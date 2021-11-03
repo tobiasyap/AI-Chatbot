@@ -9,5 +9,6 @@ const db = {};
 db.mongoose = mongoose;
 db.url = dbConfig.url;
 db.filesystem = require("./filesystem.model.js")(mongoose);
+db.feedback = require("./feedback.model.js")(mongoose);
 
 module.exports = db;

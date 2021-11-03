@@ -67,10 +67,10 @@ class AIChatBot extends Component {
            trigger: 'more'
          },
         //  {
-        //    id:'return',
-        //    message: {previousValue},
-        //    trigger: 'query'
-        //  }
+        //    id:'ans',
+        //    message: 'rem to unblock code',
+        //    trigger: 'more'
+        //  },
          {
            id:'more',
            message:'Did I answer your question?',
@@ -80,21 +80,31 @@ class AIChatBot extends Component {
          {
            id:'options',
            options: [
-             {value: 'y', label:'Yes', trigger:'log'},
+             {value: 'y', label:'Yes', trigger:'endfeedback'},
              {value: 'n', label:'No', trigger:'feedback'}
            ]
          },
          {
            id:'feedback',
            message: 'Could you tell me more about what you have searched and what you were expecting?',
-           user: true,
            trigger: 'log'
          }, 
          {
-           id:'log',
-           message: 'Thank you for your feedback!',
-          //  component: <FeedbackComponent />,
-           trigger: 'query'
+          id:'log',
+          user: true,
+          trigger: 'endfeedback'
+        }, 
+         {
+           id:'endfeedback',
+           component: <FeedbackComponent />,
+           waitAction: true,
+           asMessage:true,
+           trigger: 'test'
+         },
+         {
+           id:'test',
+           user:true,
+           trigger:'query'
          }
          ]}
          {...config}

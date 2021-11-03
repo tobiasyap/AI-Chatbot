@@ -7,3 +7,4 @@ export const UPDATE_FILE = "UPDATE_FILE";
 export const DELETE_FILE = "DELETE_FILE";
 // export const DELETE_ALL_FILES = "DELETE_ALL_FILES";
 export const GET_MODEL = "GET_MODEL";
+export const POST_FEEDBACK = "POST_FEEDBACK";
