@@ -40,14 +40,34 @@ function fileReducer(state = initState, action) {
         }
   
       case RETRIEVE_FILES:
-        const folderList = Array.from(new Set(payload.map(file => file.doc_no.split("/")[1])));
         const subgrpList = Array.from(new Set(payload.map(file => file.parent)));
         const rootList = Array.from(new Set(payload.map(file => file.metadata.grp)));
+        let folderLists = [];
+        payload.forEach((file) => {
+          let folders = file.doc_no.split("/");
+          folders = folders.filter(folder => !parseInt(folder))
+          folderLists.push(folders)
+        });
+
+        // obtain folders at each level 
+        let allFolders = []
+        for (let i=1; i < folderLists[0].length - 1; i++) { // max length = number of folders up till parent
+          let folderList = new Set(); // at each level
+          folderLists.map(folderLst => {
+              let folder = folderLst[i]; // folder at that position
+              if (!subgrpList.includes(folder) && !rootList.includes(folder)) {
+                folderList.add(folder)
+              }
+              return folderList
+          })
+          folderList = Array.from(folderList); // unique list of folders at that position
+          allFolders.push(folderList)
+        }
 
         return {
           ...state, 
           roots: rootList,
-          folders: folderList,
+          folders: allFolders,
           subgrps: subgrpList,
           currentFileList: payload,
           files: payload

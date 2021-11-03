@@ -1,0 +1,60 @@
+.con div {
+    position:relative;
+}
+
+.con div:before {
+    float: left;
+    content: "\00a0";
+    width: 7.5px;
+    height: 41px;
+}
+
+.con div div{
+    height:40px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5rem;
+    row-gap: 2rem;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    font-size: 0.85rem;
+    column-gap: 12rem;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-control {
+    font-size: 0.85rem;
+}
+
+.list-group {
+    max-height: 50vh;
+    overflow-y: scroll;
+}
+  
+.list-group-item:hover {
+    cursor: pointer;
+    background: rgba(0, 100, 100, 0.3);
+}
+
+.list-group-item.active{
+    background-color: #014282;
+    border-color: #014282;
+}
+
+.search {
+    display: flex;
+    width: 50%;
+    font-size: 0.85rem;
+}
