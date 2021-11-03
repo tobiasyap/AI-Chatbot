@@ -6,7 +6,7 @@ import './App.css';
 
 import File from "./components/file.component";
 import AddFile from "./components/add-file.component";
-import FileList from "./components/file-list.component";
+import FileList from "./components/FileList";
 import AIChatBot from "./components/AIChatBot";
 import Acronyms from "./components/Acronyms";
 
@@ -32,7 +32,7 @@ class App extends Component {
         </div>
         </nav>
 
-        <div className="container mt-3">
+        <div>
           <Switch>
           <Route exact path={["/", "/files"]} component={FileList} />
           <Route exact path={"/add"} component={AddFile} />
@@ -41,7 +41,7 @@ class App extends Component {
         </div>
 
         <div>
-          <Acronyms />
+          <Acronyms/>
         </div>
 
         <div>

@@ -1,22 +1,15 @@
 /* For react components */
-.file-list {
-  max-height: 400px;
-  min-width: 300px;
-  overflow-y: scroll;
-}
-
-.folder-list {
-  min-width: 300px;
-}
-
 .list {
   text-align: left;
-  /* max-width: 750px; */
   margin: auto;
 }
 
 a {
   color: #014282;
+}
+
+a:hover {
+  text-decoration: none;
 }
 
 .link {
@@ -25,8 +18,8 @@ a {
 }
 
 .link:hover {
-   color: #014282;
-   cursor: pointer;
+  color: #014282;
+  cursor: pointer;
 }
 
 .info {
@@ -50,6 +43,7 @@ a {
 .btn {
   color: #fff;
   background-color: #014282;
+  font-size: 0.85rem;
 }
 
 .edit-form {
@@ -58,17 +52,9 @@ a {
 }
 
 .navbar {
-  background-color: #014282
-}
-
-.list-group-item:hover {
-  cursor: pointer;
-}
-
-.list-group-item.active{
   background-color: #014282;
-  border-color: #014282;
 }
+
 /* .App-header {
   background-color: #014282;
   min-height: 100vh;
