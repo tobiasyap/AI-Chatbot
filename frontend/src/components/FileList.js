@@ -78,7 +78,7 @@ class FileList extends Component {
   getDisplayFiles = async () => {
     var displayFiles = this.state.currentRoot
       ? this.props.files.filter(
-          (doc) => doc.metadata.grp === this.state.currentRoot
+          (doc) => doc.grp === this.state.currentRoot
         )
       : this.props.files;
     displayFiles = this.state.currentFolder
@@ -89,7 +89,7 @@ class FileList extends Component {
     displayFiles = this.state.currentSubgrp
       ? displayFiles.filter((doc) => doc.parent === this.state.currentSubgrp)
       : displayFiles;
-    displayFiles.sort((a, b) => (a.metadata.title < b.metadata.title ? -1 : 1));
+    displayFiles.sort((a, b) => (a.title < b.title ? -1 : 1));
     await this.setState({
       currentFileList: displayFiles,
     });
@@ -185,7 +185,7 @@ class FileList extends Component {
                           onClick={() => this.setActiveFile(file)}
                           key={index}
                         >
-                          {file.metadata.title}
+                          {file.title}
                         </li>
                       ))}
                   </ul>
@@ -203,28 +203,28 @@ class FileList extends Component {
                     <label>
                       <strong>Title:</strong>
                     </label>{" "}
-                    {currentFile.metadata.title}
+                    {currentFile.title}
                   </div>
                   <div>
                     <br />
-                    {currentFile.metadata.doc_cat ? (
+                    {currentFile.doc_cat ? (
                       <div>
                         <label>
                           <strong>Document Category:</strong>
                         </label>{" "}
-                        {currentFile.metadata.doc_cat}
+                        {currentFile.doc_cat}
                       </div>
                     ) : (
                       <div />
                     )}
                   </div>
                   <div>
-                    {currentFile.metadata.doc_type ? (
+                    {currentFile.doc_type ? (
                       <div>
                         <label>
                           <strong>Document Type:</strong>
                         </label>{" "}
-                        {currentFile.metadata.doc_type}
+                        {currentFile.doc_type}
                       </div>
                     ) : (
                       <div />
@@ -252,21 +252,21 @@ class FileList extends Component {
                     <label>
                       <strong>Group:</strong>
                     </label>{" "}
-                    {currentFile.metadata.grp}
+                    {currentFile.grp}
                   </div>
                   <div>
                     <label>
                       <strong>Sub Group:</strong>
                     </label>{" "}
-                    {currentFile.metadata.subgrp}
+                    {currentFile.subgrp}
                   </div>
                   <div>
-                    {currentFile.metadata.revision_no ? (
+                    {currentFile.revision_no ? (
                       <div>
                         <label>
                           <strong>Revision Number:</strong>
                         </label>{" "}
-                        {currentFile.metadata.revision_no}
+                        {currentFile.revision_no}
                       </div>
                     ) : (
                       <div />
@@ -287,7 +287,7 @@ class FileList extends Component {
 
 const mapStateToProps = (state) => {
   state.files.currentFileList.sort((a, b) =>
-    a.metadata.title < b.metadata.title ? -1 : 1
+    a.title < b.title ? -1 : 1
   );
 
   return {
