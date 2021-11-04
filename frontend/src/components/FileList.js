@@ -115,6 +115,7 @@ class FileList extends Component {
 
     return (
       <div className="container">
+        <div/>
         <div className="row">
           <form onSubmit={this.findByTitle} className="search">
             <input
@@ -131,7 +132,7 @@ class FileList extends Component {
         </div>
         <div className="row">
           <div className="col">
-            <h4>Files List</h4>
+            <strong className="title-name">Files List</strong>
             <div className="col">
 
               {/* root nav */}
@@ -198,7 +199,8 @@ class FileList extends Component {
               {/* file information */}
               {currentFile ? (
                 <div>
-                  <h4>File Information</h4>
+                  <strong className="title-name">File Information</strong>
+                  <br/><br/>
                   <div>
                     <label>
                       <strong>Title:</strong>
@@ -280,6 +282,7 @@ class FileList extends Component {
               )}
             </div>
         </div>
+        <div/>
       </div>
     );
   }

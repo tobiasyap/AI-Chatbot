@@ -5,7 +5,7 @@
 }
 
 a {
-  color: #014282;
+  color: rgb(9, 50, 92);
 }
 
 a:hover {
@@ -18,7 +18,7 @@ a:hover {
 }
 
 .link:hover {
-  color: #014282;
+  color: rgb(9, 50, 92);
   cursor: pointer;
 }
 
@@ -42,8 +42,8 @@ a:hover {
 
 .btn {
   color: #fff;
-  background-color: #014282;
-  font-size: 0.85rem;
+  background-color: rgb(9, 50, 92);
+  /* font-size: 0.85rem; */
 }
 
 .edit-form {
@@ -51,10 +51,9 @@ a:hover {
   margin: auto;
 }
 
-.navbar {
-  background-color: #014282;
+.title-name {
+  font-size: 25px;
 }
-
 /* .App-header {
   background-color: #014282;
   min-height: 100vh;
