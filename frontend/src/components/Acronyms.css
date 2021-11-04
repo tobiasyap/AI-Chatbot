@@ -1,14 +1,14 @@
 .float-btn {
   left: -75px;
   position: fixed;
-  transform: translateY(-1000%);
+  transform: translateY(-1800%);
   transition: 0.3s;
   color: white;
   font-size: 0.85rem;
 }
 
 .float-btn:focus {
-  background-color: #014282;
+  background-color: rgb(9, 50, 92);
 }
 
 .float-btn:hover {
@@ -20,13 +20,13 @@
   left: 350px;
   position: fixed;
   transition: 0.3s;
-  transform: translateY(-1000%);
+  transform: translateY(-1800%);
   z-index: 100;
   font-size: 0.85rem;
 }
 
 .float-btn-open:focus {
-  background-color: #014282;
+  background-color: rgb(9, 50, 92);
 }
 
 .float-btn-open:hover {

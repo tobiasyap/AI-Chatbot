@@ -71,7 +71,7 @@ class Acronym extends Component {
             >
               {/* // <Nav variant="tabs" onSelect=s{this.setActiveLetter} className="side-drawer"> */}
               <div className="col">
-                <h4>List of Acronyms</h4>
+                <strong className="title-name">List of Acronyms</strong>
                 {/* </div> */}
                 {acronyms &&
                   Object.entries(acronyms).map((letter) => (

@@ -5,6 +5,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
 
 import File from "./components/file.component";
+import Header from "./components/Header";
+import FooterPage from "./components/Footer";
 import AddFile from "./components/add-file.component";
 import FileList from "./components/FileList";
 import AIChatBot from "./components/AIChatBot";
@@ -14,7 +16,8 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <nav className="navbar navbar-expand navbar-dark">
+        <Header/>
+        {/* <nav className="navbar navbar-expand navbar-dark">
         <Link to={"/"} className="navbar-brand">
           Home
         </Link>
@@ -30,7 +33,7 @@ class App extends Component {
             </Link>
           </li>
         </div>
-        </nav>
+        </nav> */}
 
         <div>
           <Switch>
@@ -47,29 +50,10 @@ class App extends Component {
         <div>
           <AIChatBot/>
         </div>
+        <FooterPage/>
       </Router>
     );
   }
 }
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
 
 export default App;

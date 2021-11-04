@@ -126,7 +126,7 @@ class File extends Component {
       <div>
         {currentFile ? (
           <div className="edit-form">
-            <h4>File</h4>
+            <h2>File</h2>
             <form>
               <div className="form-group">
                 <label htmlFor="title">Title</label>

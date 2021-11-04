@@ -4,7 +4,7 @@ import ChatbotComponent from './chatbot.component';
 import FeedbackComponent from './feedback.component';
 import { ThemeProvider } from "styled-components";
 // import { connect } from "react-redux"
-import botAvatar from "../bot.png";
+import botAvatar from "../assets/bot.png";
 // import userAvatar from ".png";
 
 const theme = {
@@ -12,7 +12,7 @@ const theme = {
   fontFamily: "Arial, Helvetica, sans-serif",
   headerFontColor: "#fff",
   headerFontSize: "20px",
-  headerBgColor:"#014282",
+  headerBgColor:"rgb(9, 50, 92)",
   botBubbleColor: "#3BA2AB",
   botFontColor:"#fff",
   // userFontColor: "#3BA2AB"
