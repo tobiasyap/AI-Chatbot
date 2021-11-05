@@ -111,16 +111,16 @@ class Chatbot extends Component {
                         {reply.length > 0 ? (
                             <div>
                             These are likely the documents you are looking for:
-                        <ol>
+                        <ol className="list">
                          {reply && 
                             reply.map((res, index) => (    
                                 <div>   
                                     <li class='list-link' href="#" key={index} onClick={() => this.selectFile(res)}> 
                                             {/* {res['Document ID']} */}
                                         <div class='link'>
-                                        <strong>
+                                        <b>
                                             {res['Document Description']}
-                                        </strong>
+                                        </b>
                                         </div>
                                     <div className='info'>
                                         {res['Document ID']}

@@ -26,6 +26,12 @@ a:hover {
   display: none;
 }
 
+.list {
+  font: #fff;
+  font-size: 0.85rem;
+  padding: 10px;
+}
+
 .list-link:hover .info {
   display: block;
   font-size: 12px;
@@ -54,6 +60,11 @@ a:hover {
 .title-name {
   font-size: 25px;
 }
+
+.ol {
+  font: arial;
+}
+
 /* .App-header {
   background-color: #014282;
   min-height: 100vh;
