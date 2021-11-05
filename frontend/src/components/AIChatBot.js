@@ -66,11 +66,6 @@ class AIChatBot extends Component {
            asMessage:true,
            trigger: 'more'
          },
-        //  {
-        //    id:'ans',
-        //    message: 'rem to unblock code',
-        //    trigger: 'more'
-        //  },
          {
            id:'more',
            message:'Did I answer your question?',
