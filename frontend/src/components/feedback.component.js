@@ -17,21 +17,17 @@ class Feedback extends Component {
     }
 
     async componentDidMount() {
-        try { 
-            await this.props.postFeedback({
-                boolean: 'Yes',
-                feedback: this.props.steps.log.message,
-                user_query: this.props.steps.query.message
-              })
-        }
-        catch(err) {
-            await this.props.postFeedback({
-                boolean: 'No',
-                user_query: this.props.steps.query.message
-              })
-        }
+        this.props.steps.options.message == "No" ? 
+        await this.props.postFeedback({
+            boolean: 'Yes',
+            feedback: this.props.steps.log.message,
+            user_query: this.props.steps.query.message
+            }) : 
+        await this.props.postFeedback({
+            boolean: 'No',
+            user_query: this.props.steps.query.message
+            })
         this.props.triggerNextStep();
-
         
         // const positive = this.props.results ? true : false
         // const results = this.props.results.length > 0 ? this.props.results : []
