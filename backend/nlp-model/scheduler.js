@@ -4,7 +4,7 @@ module.exports = app => {
     const {spawn} = require('child_process')
 
     // Creating a cron job which runs every day at midnight
-    cron.schedule("*0 0 * * *", function() {
+    cron.schedule("0 0 * * *", function() {
         
         try {
             console.log('python', process.cwd() + '/nlp-model/update_tfidf_corpus.py')
