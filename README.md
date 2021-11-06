@@ -1,4 +1,4 @@
-# LTA FARE PROCEDURE DOCUMENT WEBPAGE & AI-CHATBOT
+# LTA Fare Procedure Document Webpage & AI-Chatbot
 
 This project aims to make LTA fare system protocol document retrieval easy and user-friendly. This is done through a revamp of the webpage and the inclusion of an AI-Chatbot to aid users with any queries related to searching for documents. THis project is a collaboration with NUS Computing Students.
 
@@ -71,8 +71,8 @@ A webpage hosted on localhost:\\8080 will open in the default web browser.
 NUS Business Analytics Capstone Project Sem1AY2021 Team-17
 
 Members:
-Joel Yap
-Tan Xue Hui
-Genevieve Ong
-Tobias Yap
-Mitchell Teh
+* Joel Yap
+* Tan Xue Hui
+* Genevieve Ong
+* Tobias Yap
+* Mitchell Teh
