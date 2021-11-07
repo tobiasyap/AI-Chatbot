@@ -1,6 +1,4 @@
 import os
-# import textract
-import numpy as np # linear algebra
 import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
 import spacy
 import string
@@ -8,7 +6,6 @@ import gensim
 import re
 from spacy.lang.en.stop_words import STOP_WORDS
 import tika
-#tika.initVM() # initialize Java server
 tika.TikaClientOnly = True
 from tika import parser
 
@@ -53,18 +50,15 @@ punctuations = string.punctuation
 stop_words = spacy.lang.en.stop_words.STOP_WORDS
 
 ##FILE STORAGE DIRECTORY
-source_directory = os.path.abspath(__file__ + "/../../../files/")
+source_directory = os.path.abspath(__file__ + "/../../../frontend/public/files/")
 
 data, docs = [], []
 for i in os.listdir(source_directory):
     if i[-3:] != "doc" and i[-4:] != "docx" or i[0] == "~":
         continue
     lst = [i.split('.doc')[0]]
-    # text = textract.process(source_directory + "/" + i)
     parsed = parser.from_file(source_directory+"/"+ i, 'http://localhost:41000/')
     text = parsed["content"]
-    # text = textract.process(i)
-    # text = text.decode("utf-8")
     name = lst[0]
     temp = text.split(name.replace('_','/').replace('V','/').replace('//','/').replace(' ',''))
     if len(temp) > 2:
@@ -124,25 +118,26 @@ df2 = df1[df1['document_id'].isin(org_lst)]
 
 def convert_doc(row):
   parts = row['document_id'].split("_") # find the parent 
-  parts_no = "/".join(parts)
+  parts_no = "_".join(parts)
   versioned = row['document_id'][-2] == 'V'
   parent = list(filter(lambda x: x.isalpha(), parts[::-1]))[0]
   # get document: currently missing cols doc_cat, doc_type, doc_no, sub_grp (same as parent), created date, revision_no. (version)
   doc = {
       "title": row['document_name'],  # actual title should be scraped from eQMS      
-      # "doc_cat": ,    
-      # "doc_type": ,   
+      #"doc_cat": ,    
+      #"doc_type": ,   
       "doc_no": parts_no,      
       "doc": row['document_id'] + ".docx", # should be actual file      
       "grp": parts[0],         
       "subgrp": parent,   
-      # "created": ,     
-      # "revision_no": ,
-      "text": spacy_tokenizer(row['word_text'])
+      #"created": ,     
+      #"revision_no": ,
+      "text": ' '.join([str(item) for item in spacy_tokenizer(row['word_text'])])
       }
   if versioned:
     doc["revision_no"] = int(row['document_id'][-1])
     doc["doc_no"] = parts_no[:-3]
+  # print(doc)
   return doc
 
 docs = df2.apply(lambda x: convert_doc(x), axis=1)
@@ -150,7 +145,6 @@ docs = df2.apply(lambda x: convert_doc(x), axis=1)
 ##Create Dictionary
 #get clean text to be used in dictionary
 word_text = df2['word_text_tokenized']
-word_text[0:5]
 
 from gensim import corpora
 
@@ -176,12 +170,11 @@ word_frequencies = [[(dictionary[id], frequency) for id, frequency in line] for 
 #BUILD TFIDF
 chatbot_tfidf_model = gensim.models.TfidfModel(corpus, id2word=dictionary)
 
-chatbot_tfidf_model.save('chatbot_tfidf_model_test')
-dictionary.save('dictionary_test')
+chatbot_tfidf_model.save('./nlp-model/chatbot_tfidf_model_test')
+dictionary.save('./nlp-model/dictionary_test')
 
-import pickle 
-file = open('dict_test.txt', 'wb')
-pickle.dump(dictionary, file)
-file.close()
+gensim.corpora.MmCorpus.serialize('./nlp-model/chatbot_tfidf_model_mm_test', chatbot_tfidf_model[corpus])
 
-gensim.corpora.MmCorpus.serialize('chatbot_tfidf_model_mm_test', chatbot_tfidf_model[corpus])
+import json
+with open('./nlp-model/docs_test.txt', 'w') as convert_file:
+     convert_file.write(json.dumps(list(docs)))
