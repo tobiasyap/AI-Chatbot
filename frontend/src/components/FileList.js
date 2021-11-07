@@ -242,11 +242,14 @@ class FileList extends Component {
                     <label>
                       <strong>Download Document:</strong>
                     </label>{" "}
-                    <a
-                      href="./files/Project Charter Sample.doc"
-                      download="Project Charter Sample.doc"
-                    >
-                      {/* <a href={"./files/" + currentFile.doc_no + ".doc"} download={currentFile.doc_no + ".doc"}>  */}
+                    {/* <a
+                      href="./files/RSE_SP_FS_02_640.doc"
+                      download="RSE_SP_FS_02_640.doc"
+                    > */}
+                    <a 
+                      href={"./" + currentFile.doc_no + ".doc"} 
+                      download={currentFile.doc_no + ".doc"}
+                    > 
                       <FcDownload size="25" /> {currentFile.doc_no}
                     </a>
                   </div>

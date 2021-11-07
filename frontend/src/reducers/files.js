@@ -44,7 +44,7 @@ function fileReducer(state = initState, action) {
         const rootList = Array.from(new Set(payload.map(file => file.grp)));
         let folderLists = [];
         payload.forEach((file) => {
-          let folders = file.doc_no.split("/");
+          let folders = file.doc_no.split("_");
           folders = folders.filter(folder => !parseInt(folder))
           folderLists.push(folders)
         });
