@@ -20,13 +20,13 @@ Python will be used to run the AI Chatbot backed code.
 ## Getting Started
 
 1. Ensure that all the relevant python packages are installed on your local computer.
-If your packages are not installed, use the package manager [pip](https://pip.pypa.io/en/stable/) to install relevant python packages used to run the AI-Chatbot Script.
+If your packages are not installed, use the package manager [pip](https://pip.pypa.io/en/stable/) to install relevant python packages used to run the AI-Chatbot Script:
 
 ```bash
 pip install requirements.txt
 ``` 
 
-or alternatively 
+or alternatively, install them individually:
 
 ```bash
 pip install pandas
@@ -39,14 +39,14 @@ pip install pymongo
 pip install datetime
 ```
 
-2. To run the Node.js Express backend server, open a bash terminal and install all the required packages
+2. To run the Node.js Express backend server, open a bash terminal and install all the required packages:
 
 ```bash
 cd backend
 npm install
 ```
 
-All the relevant packages will be automatically downloaded and installed. Afterwards, start the server.
+All the relevant packages will be automatically downloaded and installed. Afterwards, start the server:
 
 ```bash
 node server
@@ -54,14 +54,14 @@ node server
 
 The server should be hosted on localhost:8080.
 
-3. To run the React Redux Frontend for the File Display Tool, open a seperate bash terminal and install all the required packages.
+3. To run the React Redux Frontend for the File Display Tool, open a seperate bash terminal and install all the required packages:
 
 ```bash
 cd frontend
 npm install
 ```
 
-All the relevant packages will be automatically downloaded and installed. Afterwards, start the server.
+All the relevant packages will be automatically downloaded and installed. Afterwards, start the server:
 
 ```bash
 npm start
@@ -69,14 +69,14 @@ npm start
 
 A webpage hosted on localhost:8081 will open in the default web browser.
 
-4. To run the React Frontend for the Chatbot Dashboard, open a seperate bash terminal and install all the required packages.
+4. To run the React Frontend for the Chatbot Dashboard, open a seperate bash terminal and install all the required packages:
 
 ```bash
 cd visualization
 npm install
 ```
 
-All the relevant packages will be automatically downloaded and installed. Afterwards, start the server.
+All the relevant packages will be automatically downloaded and installed. Afterwards, start the server:
 
 ```bash
 npm start
