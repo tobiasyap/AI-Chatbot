@@ -1,0 +1,57 @@
+.container {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 50% 50%;
+}
+
+.row-display {
+  width: 650px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.left {
+  align-self: start;
+  justify-self: end;
+  padding: 10px;
+}
+
+.right {
+  align-self: start;
+  justify-self: start;
+  padding: 10px;
+}
+
+.header {
+  display: flex;
+}
+
+.title {
+  font-size: 30px;
+  background: rgba(224, 224, 224, 0.4);
+  color: rgb(51, 51, 51);
+  padding: 5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.title-name {
+  font-size: 1.5rem;
+}
+
+.page {
+  display: grid;
+}
+
+.chart-title {
+  display: flex;
+  justify-content: center;
+}
+
+.metric {
+  color: rgb(90, 190, 236);
+  font-size: 25px;
+}
