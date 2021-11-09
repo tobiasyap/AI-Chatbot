@@ -23,7 +23,7 @@ Python will be used to run the AI Chatbot backed code.
 If your packages are not installed, use the package manager [pip](https://pip.pypa.io/en/stable/) to install relevant python packages used to run the AI-Chatbot Script:
 
 ```bash
-pip install requirements.txt
+pip install -r requirements.txt
 ``` 
 
 or alternatively, install them individually:
@@ -39,25 +39,9 @@ pip install pymongo
 pip install datetime
 ```
 
-2. To run the Node.js Express backend server, open a bash terminal and install all the required packages:
+2. To run the Node.js Express backend server, open a bash terminal in the `/backend` directory (or enter `cd backend` if you are at the root directory) and install all the required packages:
 
 ```bash
-cd backend
-npm install
-```
-
-All the relevant packages will be automatically downloaded and installed. Afterwards, start the server:
-
-```bash
-node server
-```
-
-The server should be hosted on localhost:8080.
-
-3. To run the React Redux Frontend for the File Display Tool, open a seperate bash terminal and install all the required packages:
-
-```bash
-cd frontend
 npm install
 ```
 
@@ -67,12 +51,11 @@ All the relevant packages will be automatically downloaded and installed. Afterw
 npm start
 ```
 
-A webpage hosted on localhost:8081 will open in the default web browser.
+The server should be hosted on `port 8080`. You can visit the address `localhost:8000` and you should see a successful message if it is up and running.
 
-4. To run the React Frontend for the Chatbot Dashboard, open a seperate bash terminal and install all the required packages:
+3. To run the React Redux Frontend for the File Display Tool, open a seperate bash terminal in the `/frontend` directory (or enter `cd frontend` if you are at the root directory) and install all the required packages:
 
 ```bash
-cd visualization
 npm install
 ```
 
@@ -82,7 +65,23 @@ All the relevant packages will be automatically downloaded and installed. Afterw
 npm start
 ```
 
-A webpage hosted on localhost:3000 will open in the default web browser.
+A webpage hosted on `port 8081` will open in the default web browser with the address `localhost:8081`.
+
+4. To run the React Frontend for the Chatbot Dashboard, open a seperate bash terminal in the `/visualization` directory (or enter `cd visualization` if you are at the root directory) and install all the required packages:
+
+```bash
+npm install
+```
+
+All the relevant packages will be automatically downloaded and installed. Afterwards, start the server:
+
+```bash
+npm start
+```
+
+A webpage hosted on `port 3000` will open in the default web browser with the address `localhost:3000`. 
+
+Note that for the data to be accurately displayed on the dashboard, the backend server for the File Display Tool has to be up and running so that the API calls will be successful.
 
 
 ## Usage
