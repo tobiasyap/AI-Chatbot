@@ -1,3 +1,4 @@
+// For sending HTTP requests using axios
 import axios from "axios";
 
 export default axios.create({

@@ -1,3 +1,5 @@
+// For sgds-govtech footer components
+
 import { Footer } from "sgds-govtech-react";
 
 // const links = {
@@ -9,7 +11,10 @@ import { Footer } from "sgds-govtech-react";
 
 export default function FooterPage() {
   return (
-    <Footer title="Land Transport Authority Fare System Department" date="5 Nov 2021"/>
+    <Footer title="Land Transport Authority Fare System Department" date="9 Nov 2021"/>
+    
+    // Links can be added to the footer
+
     //   <div className="col is-3">
     //     <p className="has-text-white">
     //       <b>Category 1</b>

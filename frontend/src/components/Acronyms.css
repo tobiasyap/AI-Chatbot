@@ -1,3 +1,4 @@
+/* Styling for Acronyms side tab */
 .float-btn {
   left: -75px;
   position: fixed;
@@ -33,10 +34,6 @@
   cursor: pointer;
   background: rgba(0, 0, 0, 0.5);
 }
-
-/* .float-btn-open:focus {
-  background-color: #014282;
-} */
 
 .letter-acr {
   display: flex;
@@ -76,7 +73,6 @@
   width: 50%;
   max-width: 350px;
   box-shadow: 1px 0px 7px rgba(0, 0, 0, 0.5);
-  /* position: sticky; */
   position: fixed;
   top: 0;
   left: 0;

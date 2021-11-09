@@ -1,3 +1,5 @@
+// For displaying Acronyms at the side tab
+
 import { Component } from "react";
 import { Button } from "react-bootstrap";
 import {
@@ -8,7 +10,6 @@ import {
 } from "react-icons/fa";
 import { Nav, Dropdown } from "react-bootstrap";
 import { acronymData } from "./AcronymData";
-// import { Slide, Fade } from "react-awesome-reveal";
 import "./Acronyms.css";
 
 class Acronym extends Component {
@@ -52,7 +53,6 @@ class Acronym extends Component {
 
     return (
       <div>
-        {/* <div class="side-nav"> */}
         {drawerOpen ? (
           <Button className="float-btn-open" onClick={this.drawerClick}>
             <FaChevronLeft />
@@ -69,10 +69,8 @@ class Acronym extends Component {
               onSelect={this.setActiveLetter}
               className={drawerOpen ? "side-drawer open" : "side-drawer"}
             >
-              {/* // <Nav variant="tabs" onSelect=s{this.setActiveLetter} className="side-drawer"> */}
               <div className="col">
                 <strong className="title-name">List of Acronyms</strong>
-                {/* </div> */}
                 {acronyms &&
                   Object.entries(acronyms).map((letter) => (
                     <Nav.Item>
@@ -80,13 +78,11 @@ class Acronym extends Component {
                         {letter[1]["open"] ? (
                           <div>
                             <Dropdown.Divider />
-                            {/* <div className="letter-acr"> */}
                             <strong className="letter">
                               {" "}
                               {letter[0]}{" "}
                             </strong>{" "}
                             <FaChevronUp />
-                            {/* </div> */}
                             <ul className="list-group">
                               {Object.entries(letter[1]["names"]).map((acr) => (
                                 <div>
@@ -97,7 +93,6 @@ class Acronym extends Component {
                                 </div>
                               ))}
                             </ul>
-                            {/* <Dropdown.Divider /> */}
                           </div>
                         ) : (
                           <div>
@@ -115,11 +110,6 @@ class Acronym extends Component {
               </div>
             </Nav>
           </div>
-          {/* <Button className='float-btn-open' onClick={this.drawerClick}>
-                            <FaChevronLeft/>
-                        </Button> */}
-          {/* </Fade> */}
-          {/* </Slide> */}
           <div>
             {drawerOpen ? (
               <div className="backdrop" onClick={this.backdropClick} />
@@ -128,8 +118,6 @@ class Acronym extends Component {
             )}
           </div>
         </div>
-        {/* <div className="backdrop" onClick={this.backdropClick}/> </div> ) : ( <div/>) } */}
-        {/* {backdrop} </div> ) : (<div/>) } */}
       </div>
     );
   }

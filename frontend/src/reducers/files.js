@@ -1,4 +1,4 @@
-// Update files state of the Redux store
+// Reducer for File related states and actions - update file states in the Redux store
 
 import {
     CREATE_FILE,
@@ -6,27 +6,15 @@ import {
     FIND_FILES,
     UPDATE_FILE,
     DELETE_FILE,
-    // DELETE_ALL_FILES,
 } from "../actions/types";
   
-// const initialState = [];
 const initState = {
-  //   roots: ['RSE'],
     files: [],
     roots: [],
-  //   subgrps: ['FS'],
     folders: [],
     subgrps: [],
     currentFileList: [],
     currentFile: null
-    // currentFile: null,
-    // currentFileIndex: -1, 
-    // currentRoot: '',
-    // currentFolder: '',
-  //   currentRoot: null,
-    // currentRootIndex: -1,
-    // searchTitle: "",
-    // folders: ['SP', 'SD']
   };
 
 function fileReducer(state = initState, action) {
@@ -89,26 +77,12 @@ function fileReducer(state = initState, action) {
           ...state,
           currentFile: file
         }
-        // return state.currentFileList.map((file) => {
-        //   if (file.doc_no === payload.doc_no) {
-        //     return {
-        //       ...state,
-        //       currentFile: file
-        //       // ...payload,
-        //     };
-          // } else {
-          //   return file;
-          // }
-        // });
         
       case DELETE_FILE: 
         return {
           ...state,
           files: state.files.filter(({ id }) => id !== payload.id)
         }
-  
-      // case DELETE_ALL_FILES:
-      //   return [];
   
       default:
         return state;

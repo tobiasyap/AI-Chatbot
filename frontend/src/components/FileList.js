@@ -1,4 +1,4 @@
-// List down all the files
+// For listing down all the files - main home page
 
 import React, { Component } from "react";
 import { connect } from "react-redux";
@@ -77,9 +77,7 @@ class FileList extends Component {
 
   getDisplayFiles = async () => {
     var displayFiles = this.state.currentRoot
-      ? this.props.files.filter(
-          (doc) => doc.grp === this.state.currentRoot
-        )
+      ? this.props.files.filter((doc) => doc.grp === this.state.currentRoot)
       : this.props.files;
     displayFiles = this.state.currentFolder
       ? displayFiles.filter((doc) =>
@@ -115,7 +113,7 @@ class FileList extends Component {
 
     return (
       <div className="container">
-        <div/>
+        <div />
         <div className="row">
           <form onSubmit={this.findByTitle} className="search">
             <input
@@ -149,29 +147,33 @@ class FileList extends Component {
               <div className="con">
                 {folders &&
                   folders.map((folderLst) => (
-                    <div><div>
-                    <Nav variant="tabs" onSelect={this.setActiveFolder}>
-                      {folderLst &&
-                        folderLst.map((folder) => (
-                          <Nav.Item>
-                            <Nav.Link eventKey={folder}>{folder}</Nav.Link>
-                          </Nav.Item>
-                        ))}
-                    </Nav>
-                    </div></div>
+                    <div>
+                      <div>
+                        <Nav variant="tabs" onSelect={this.setActiveFolder}>
+                          {folderLst &&
+                            folderLst.map((folder) => (
+                              <Nav.Item>
+                                <Nav.Link eventKey={folder}>{folder}</Nav.Link>
+                              </Nav.Item>
+                            ))}
+                        </Nav>
+                      </div>
+                    </div>
                   ))}
 
                 {/* subgrp nav */}
-                <div><div>
-                <Nav variant="tabs" onSelect={this.setActiveSubgrp}>
-                  {subgrps &&
-                    subgrps.map((subgrp) => (
-                      <Nav.Item>
-                        <Nav.Link eventKey={subgrp}>{subgrp}</Nav.Link>
-                      </Nav.Item>
-                    ))}
-                </Nav>
-                </div></div>
+                <div>
+                  <div>
+                    <Nav variant="tabs" onSelect={this.setActiveSubgrp}>
+                      {subgrps &&
+                        subgrps.map((subgrp) => (
+                          <Nav.Item>
+                            <Nav.Link eventKey={subgrp}>{subgrp}</Nav.Link>
+                          </Nav.Item>
+                        ))}
+                    </Nav>
+                  </div>
+                </div>
 
                 {/* filelist */}
                 <div>
@@ -181,7 +183,9 @@ class FileList extends Component {
                         <li
                           className={
                             "list-group-item " +
-                            (file === currentFile ? "active" : "list-group-item")
+                            (file === currentFile
+                              ? "active"
+                              : "list-group-item")
                           }
                           onClick={() => this.setActiveFile(file)}
                           key={index}
@@ -190,116 +194,115 @@ class FileList extends Component {
                         </li>
                       ))}
                   </ul>
-                  </div>
                 </div>
               </div>
             </div>
-            <div className="col">
+          </div>
+          <div className="col">
 
-              {/* file information */}
-              {currentFile ? (
+            {/* file information */}
+            {currentFile ? (
+              <div>
+                <strong className="title-name">File Information</strong>
+                <br />
+                <br />
                 <div>
-                  <strong className="title-name">File Information</strong>
-                  <br/><br/>
-                  <div>
-                    <label>
-                      <strong>Title:</strong>
-                    </label>{" "}
-                    {currentFile.title}
-                  </div>
-                  <div>
-                    <br />
-                    {currentFile.doc_cat ? (
-                      <div>
-                        <label>
-                          <strong>Document Category:</strong>
-                        </label>{" "}
-                        {currentFile.doc_cat}
-                      </div>
-                    ) : (
-                      <div />
-                    )}
-                  </div>
-                  <div>
-                    {currentFile.doc_type ? (
-                      <div>
-                        <label>
-                          <strong>Document Type:</strong>
-                        </label>{" "}
-                        {currentFile.doc_type}
-                      </div>
-                    ) : (
-                      <div />
-                    )}
-                  </div>
-                  <div>
-                    <label>
-                      <strong>Document Number:</strong>
-                    </label>{" "}
-                    {currentFile.doc_no}
-                  </div>
-                  <div>
-                    <label>
-                      <strong>Download Document:</strong>
-                    </label>{" "}
-                    {/* <a
+                  <label>
+                    <strong>Title:</strong>
+                  </label>{" "}
+                  {currentFile.title}
+                </div>
+                <div>
+                  <br />
+                  {currentFile.doc_cat ? (
+                    <div>
+                      <label>
+                        <strong>Document Category:</strong>
+                      </label>{" "}
+                      {currentFile.doc_cat}
+                    </div>
+                  ) : (
+                    <div />
+                  )}
+                </div>
+                <div>
+                  {currentFile.doc_type ? (
+                    <div>
+                      <label>
+                        <strong>Document Type:</strong>
+                      </label>{" "}
+                      {currentFile.doc_type}
+                    </div>
+                  ) : (
+                    <div />
+                  )}
+                </div>
+                <div>
+                  <label>
+                    <strong>Document Number:</strong>
+                  </label>{" "}
+                  {currentFile.doc_no}
+                </div>
+                <div>
+                  <label>
+                    <strong>Download Document:</strong>
+                  </label>{" "}
+                  {/* <a
                       href="./files/RSE_SP_FS_02_640.doc"
                       download="RSE_SP_FS_02_640.doc"
                     > */}
-                    <a 
-                      href={"./" + currentFile.doc_no + ".doc"} 
-                      download={currentFile.doc_no + ".doc"}
-                    > 
-                      <FcDownload size="25" /> {currentFile.doc_no}
-                    </a>
-                  </div>
-                  <div>
-                    <label>
-                      <strong>Group:</strong>
-                    </label>{" "}
-                    {currentFile.grp}
-                  </div>
-                  <div>
-                    <label>
-                      <strong>Sub Group:</strong>
-                    </label>{" "}
-                    {currentFile.subgrp}
-                  </div>
-                  <div>
-                    {currentFile.revision_no ? (
-                      <div>
-                        <label>
-                          <strong>Revision Number:</strong>
-                        </label>{" "}
-                        {currentFile.revision_no}
-                      </div>
-                    ) : (
-                      <div />
-                    )}
-                  </div>
+                  <a
+                    href={"./" + currentFile.doc_no + ".doc"}
+                    download={currentFile.doc_no + ".doc"}
+                  >
+                    <FcDownload size="25" /> {currentFile.doc_no}
+                  </a>
                 </div>
-              ) : (
                 <div>
-                  <br />
+                  <label>
+                    <strong>Group:</strong>
+                  </label>{" "}
+                  {currentFile.grp}
                 </div>
-              )}
-            </div>
+                <div>
+                  <label>
+                    <strong>Sub Group:</strong>
+                  </label>{" "}
+                  {currentFile.subgrp}
+                </div>
+                <div>
+                  {currentFile.revision_no ? (
+                    <div>
+                      <label>
+                        <strong>Revision Number:</strong>
+                      </label>{" "}
+                      {currentFile.revision_no}
+                    </div>
+                  ) : (
+                    <div />
+                  )}
+                </div>
+              </div>
+            ) : (
+              <div>
+                <br />
+              </div>
+            )}
+          </div>
         </div>
-        <div/>
+        <div />
       </div>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  state.files.currentFileList.sort((a, b) =>
-    a.title < b.title ? -1 : 1
-  );
+  state.files.currentFileList.sort((a, b) => (a.title < b.title ? -1 : 1));
 
   return {
-    files: state.files.files, // grabbing the files state from the reducer
+    files: state.files.files,
     roots: state.files.roots,
-    folders: state.files.folders,
+    folders: state.files.folders, // can be extended to multiple folders in between
     subgrps: state.files.subgrps,
     currentFile: state.files.currentFile,
     currentFileList: state.files.currentFileList,

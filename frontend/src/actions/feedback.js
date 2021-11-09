@@ -1,3 +1,5 @@
+// For CRUD (create/retrieve/update/delete) actions for feedback
+
 import {
     POST_FEEDBACK
 } from "./types";
@@ -8,7 +10,6 @@ import FeedbackDataService from "../services/feedback.service";
 export const postFeedback = (feedback) => async (dispatch) => {
     try {
       const res = await FeedbackDataService.postFeedback(feedback);
-      // console.log("Received response", res)
       console.log(res)
   
       dispatch({
@@ -18,7 +19,6 @@ export const postFeedback = (feedback) => async (dispatch) => {
 
       return Promise.resolve(res.data);
     } catch (err) {
-      // console.log('actions feedback')
       return Promise.reject(err);
     }
   };

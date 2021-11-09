@@ -1,4 +1,4 @@
-// Data service that uses axios object to send HTTP requests/ make API calls for filesystem
+// Data service that uses axios object to send HTTP requests/ make API calls for feedback
 
 import http from "../http-common";
 
