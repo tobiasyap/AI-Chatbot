@@ -66,7 +66,11 @@ class Wordcloud extends Component {
             Most Frequently Used Words in Feedbacks
           </strong>
         </div>
-        <ReactWordcloud words={wordData} size={sizes} options={options} />
+        <>
+        {wordData.length ? (
+          <ReactWordcloud words={wordData} size={sizes} options={options} />
+        ) : ( <div className="chart-title"><br/> There is no data yet! </div> ) }
+        </>
       </div>
     );
   }

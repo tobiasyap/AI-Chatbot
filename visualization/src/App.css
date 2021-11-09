@@ -2,48 +2,56 @@
   display: grid;
   grid-template-columns: 50% 50%;
   grid-template-rows: 50% 50%;
+  margin-bottom: 10%;
 }
 
 .row-display {
   width: 650px;
-  height: 300px;
+  height: 350px;
   display: flex;
   flex-direction: column;
+  row-gap: 1rem;
   align-items: center;
-  justify-content: center;
 }
 
 .left {
   align-self: start;
   justify-self: end;
   padding: 10px;
+  margin-top: 10px;
+  width: 650px;
+  height: 350px;
+  box-sizing: border-box;
 }
 
 .right {
   align-self: start;
   justify-self: start;
+  margin-top: 10px;
   padding: 10px;
+  width: 650px;
+  height: 350px;
 }
 
 .header {
   display: flex;
-}
-
-.title {
-  font-size: 30px;
-  background: rgba(224, 224, 224, 0.4);
-  color: rgb(51, 51, 51);
-  padding: 5rem;
-  width: 100%;
-  box-sizing: border-box;
+  flex-direction: column;
+  row-gap: 1rem;
+  align-items: center;
 }
 
 .title-name {
   font-size: 1.5rem;
 }
 
+.title-empty {
+  margin: auto;
+  padding: 10px;
+}
+
 .page {
   display: grid;
+  height: 100%;
 }
 
 .chart-title {

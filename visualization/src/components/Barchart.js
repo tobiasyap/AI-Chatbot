@@ -55,17 +55,21 @@ class Barchart extends Component {
             Most Frequently Used Words in Queries
           </strong>
         </div>
+        <>
+        {barData.length ? (
         <BarChart
-          data={barData}
-          height={300}
-          width={650}
-          isAnimationActive={true}
-        >
-          <XAxis dataKey="word" />
-          <YAxis />
-          <Tooltip />
-          <Bar dataKey="count" fill="#ff9558" />
-        </BarChart>
+        data={barData}
+        height={400}
+        width={650}
+        isAnimationActive={true}
+      >
+        <XAxis dataKey="word" height={150} angle={-45} interval={0} textAnchor="end"/>
+        <YAxis />
+        <Tooltip />
+        <Bar dataKey="count" fill="#ff9558" />
+      </BarChart>
+        ) : ( <div className="chart-title"><br/> There is no data yet! </div> ) }
+        </>
       </div>
     );
   }
