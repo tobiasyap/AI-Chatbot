@@ -1,4 +1,4 @@
-// Displays file details 
+// For possible admin use in future - displays each file detail with update/delete functions
 
 import React, { Component } from "react";
 import { connect } from "react-redux";

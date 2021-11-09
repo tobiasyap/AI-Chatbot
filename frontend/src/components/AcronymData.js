@@ -1,3 +1,5 @@
+// Stores all acronyms - can be further extended/ edited
+
 export const acronymData = {
         A: { names: {
             AA:	"Adult Anonymous",

@@ -12,33 +12,39 @@ class Piechart extends Component {
   }
 
   async componentDidMount() {
-    let response = await fetch(`${url}/feedback`, {
-      method: "GET",
-    });
+    try {
+      let response = await fetch(`${url}/feedback`, {
+        method: "GET",
+      });
 
-    let data = await response.json();
-    let pieData = {};
-    for (let i = 0; i < data.length; i++) {
-      const bool = data[i].boolean;
-      if (!(bool in pieData)) {
-        pieData[bool] = 1;
-      } else {
-        pieData[bool] += 1;
+      let data = await response.json();
+      // Obtaining number of "Yes" and "No"
+      let pieData = {};
+      for (let i = 0; i < data.length; i++) {
+        const bool = data[i].boolean;
+        if (!(bool in pieData)) {
+          pieData[bool] = 1;
+        } else {
+          pieData[bool] += 1;
+        }
       }
+      // To convert into the right data format for plotting
+      var pie = [];
+      for (var p in pieData) {
+        pie.push([p, pieData[p]]);
+      }
+      pie = pie.map(([bool, count]) => ({ bool, count }));
+      this.setState({
+        pieData: pie,
+      });
+    } catch(err) {
+      console.log(err);
     }
-    var pie = [];
-    for (var p in pieData) {
-      pie.push([p, pieData[p]]);
-    }
-    pie = pie.map(([bool, count]) => ({ bool, count }));
-    this.setState({
-      pieData: pie,
-    });
   }
 
   render() {
     const { pieData } = this.state;
-    const COLORS = ["#20ada2", "#fa7474"];
+    const COLORS = ["#20ada2", "#fa7474"]; // Selection of colors on piechart, can be changed
 
     const renderActiveShape = (props) => {
       const RADIAN = Math.PI / 180;
@@ -131,7 +137,9 @@ class Piechart extends Component {
         <div className="chart-title">
           <strong className="title-name">Questions Chatbot Answered</strong>
         </div>
-        <PieChart width={650} height={300}>
+        <>
+        {pieData.length ? (
+          <PieChart width={650} height={300}>
           <Pie
             activeIndex={this.state.activeIndex}
             activeShape={renderActiveShape}
@@ -152,6 +160,8 @@ class Piechart extends Component {
             ))}
           </Pie>
         </PieChart>
+        ) : ( <div className="chart-title"><br/> There is no data yet! </div> ) }
+        </>
       </div>
     );
   }

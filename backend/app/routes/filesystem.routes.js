@@ -1,4 +1,4 @@
-  // To set up routes and their responses
+  // To set up routes for filesystem and their responses
 
 module.exports = app => {
   const filesystem = require("../controllers/filesystem.controller.js");
@@ -14,9 +14,6 @@ module.exports = app => {
 
   // Retrieve a single file with title
   router.get("/files?title=:title", filesystem.findAll);
-
-  // Retrieve all published files
-  // router.get("/published", filesystem.findAllPublished);
 
   // Retrieve a single file with id
   router.get("/files/:id", filesystem.find);

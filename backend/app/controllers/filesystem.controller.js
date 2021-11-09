@@ -1,4 +1,4 @@
-// Set up functions to work with CRUD operations
+// Set up functions for filesystem to work with CRUD operations
 
 const db = require("../models");
 const File = db.filesystem;
@@ -33,7 +33,6 @@ exports.create = (req, res) => {
     // Save File in the database
     file
       .save(file)
-      // .save(File, { validateBeforeSave: false })
       .then(data => {
         res.send(data);
       })
@@ -75,25 +74,6 @@ exports.createAll = (req, res) => {
         console.log("Successfully inserted: ", inserted);
       }
     })
-    // // Create new documents by creating an instance of the model
-    // const file = new File({
-    //   parent: req.body.parent, // null if root folder
-    //   metadata: req.body.metadata
-    // });
-
-    // Save document in the database
-    // file
-    //   .save(file)
-    //   // .save(File, { validateBeforeSave: false })
-    //   .then(data => {
-    //     res.send(data);
-    //   })
-    //   .catch(err => {
-    //     res.status(500).send({
-    //       message:
-    //         err.message || "Some error occurred while creating the File."
-    //     });
-    //   });
 } 
 
 // Retrieve all Files from the database.
@@ -192,17 +172,3 @@ exports.deleteAll = (req, res) => {
         });
       });
   };
-
-// Find all published Files
-// exports.findAllPublished = (req, res) => {
-//     File.find({ published: true })
-//       .then(data => {
-//         res.send(data);
-//       })
-//       .catch(err => {
-//         res.status(500).send({
-//           message:
-//             err.message || "Some error occurred while retrieving Files."
-//         });
-//       });
-//   };

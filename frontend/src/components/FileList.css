@@ -1,62 +1,55 @@
+/* Styling for File System main page */
 .con div {
-    position:relative;
+  position: relative;
 }
 
 .con div:before {
-    float: left;
-    content: "\00a0";
-    width: 7.5px;
-    height: 41px;
+  float: left;
+  content: "\00a0";
+  width: 7.5px;
+  height: 41px;
 }
 
-.con div div{
-    height:40px;
+.con div div {
+  height: 40px;
 }
 
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* font-size: 0.85rem; */
-    padding: 1rem;
-    row-gap: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  row-gap: 2rem;
 }
 
 .row {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    /* font-size: 0.85rem; */
-    column-gap: 12rem;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  column-gap: 12rem;
 }
 
 .col {
-    display: flex;
-    flex-direction: column;
-}
-
-.form-control {
-    /* font-size: 0.85rem; */
+  display: flex;
+  flex-direction: column;
 }
 
 .list-group {
-    max-height: 80vh;
-    overflow-y: scroll;
-}
-  
-.list-group-item:hover {
-    cursor: pointer;
-    background: rgba(9, 50, 92, 0.3);
+  max-height: 80vh;
+  overflow-y: scroll;
 }
 
-.list-group-item.active{
-    background-color: rgb(9, 50, 92);
-    /* background-color: #014282; */
-    border-color: rgb(9, 50, 92);
+.list-group-item:hover {
+  cursor: pointer;
+  background: rgba(9, 50, 92, 0.3);
+}
+
+.list-group-item.active {
+  background-color: rgb(9, 50, 92);
+  border-color: rgb(9, 50, 92);
 }
 
 .search {
-    display: flex;
-    width: 50%;
-    /* font-size: 0.85rem; */
+  display: flex;
+  width: 50%;
 }

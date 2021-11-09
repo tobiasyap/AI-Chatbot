@@ -1,3 +1,5 @@
+// Reducer for Chatbot related states and actions - update chatbot states in the Redux store
+
 import {
     GET_MODEL,
     POST_FEEDBACK,
@@ -6,7 +8,6 @@ import {
 const initState = {
   results: null
 };
-// const initState= [];
 
 function chatbotReducer(state = initState, action) {
     const { type, payload } = action;

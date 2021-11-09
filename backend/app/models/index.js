@@ -1,6 +1,6 @@
-// Configuring mongoDB to work
+// Configuring mongoDB for connection
 
-const dbConfig = require("../config/db.config.js");
+const dbConfig = require("../config/db.config.js"); // contains the mongoDB URI
 
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;

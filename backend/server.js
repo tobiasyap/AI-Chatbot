@@ -1,4 +1,4 @@
-// Main server script where everything works
+// Main server script that runs all backend processes
 
 const express = require("express");
 const cors = require("cors");
@@ -17,25 +17,17 @@ app.use(function(req, res, next) {
   next();
 });
 
-
 // parse requests of content-type - application/json
 app.use(express.json());
 
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
-// // parse requests of content-type - application/json
-// app.use(bodyParser.json());
-
-// // parse requests of content-type - application/x-www-form-urlencoded
-// app.use(bodyParser.urlencoded({ extended: true }));
-
 const db = require("./app/models");
 
 var fs = require('fs');
-const { controller } = require("./app/controllers/filesystem.controller");
-var data = fs.readFileSync('./nlp-model/docs.txt', 'utf8').toString();
-var docs = JSON.parse(data);
+// var data = fs.readFileSync('./nlp-model/docs.txt', 'utf8').toString();
+// var docs = JSON.parse(data);
 
 // connect to database and insert files
 db.mongoose
@@ -47,16 +39,24 @@ db.mongoose
       console.log("Cannot connect to the database:", err)
       process.exit();
     } else {
-      await db.models.filesystem.deleteMany().then(response => {
-        console.log("response:", response);
-      }, error => { 
-        console.log("Cannot delete the documents:", error);
-      }) // end of deletion
-      await db.models.filesystem.insertMany(docs).then(response => {
-        console.log("Successfully inserted");
-      }, error => {
-        console.log("Cannot insert the documents:", error);
-      }) // end of insertion
+      // // delete all files in database
+      // await db.models.filesystem.deleteMany().then(response => {
+      //   console.log("response:", response);
+      // }, error => { 
+      //   console.log("Cannot delete the documents:", error);
+      // }) // end of deletion 
+      // // insert all documents in current version of docs.txt to database
+      // await db.models.filesystem.insertMany(docs).then(response => {
+      //   console.log("Successfully inserted");
+      // }, error => {
+      //   console.log("Cannot insert the documents:", error);
+      // }) // end of insertion
+      // // delete all feedbacks in database
+      // await db.models.feedback.deleteMany().then(response => {
+      //   console.log("response:", response);
+      // }, error => {
+      //   console.log("Cannot delete feedbacks:", error);
+      // }) // end of deleting feedbacks
     }
   }) // end of connection
 
@@ -64,16 +64,6 @@ db.mongoose
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to the filesystem application." });
 });
-
-// insert all documents 
-// app.post("/files", (req, res) => {
-//   controller.createAll(docs)
-// })
-
-// delete all documents
-// app.post("/delete", (req, res) => {
-//   controller.deleteAll()
-// })
 
 require("./app/routes/filesystem.routes")(app);
 require("./app/routes/chatbot.routes")(app);

@@ -1,10 +1,10 @@
-// Create the data model for mongoDB
+// Create the mongoDB data model for filesystem
+
 module.exports = mongoose => {
   const FileSystem = mongoose.model(
     "filesystem",
     mongoose.Schema(
       {
-        // parent: String, // null if root folder
         title: String,       // document title
         doc_cat: String,     // document category
         doc_type: String,    // document type

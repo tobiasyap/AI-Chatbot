@@ -31,7 +31,6 @@ export const createFile = (title, description) => async (dispatch) => {
 export const retrieveFiles = () => async (dispatch) => {
     try {
       const res = await FileDataService.getAll();
-      // console.log(res.data)
 
       dispatch({
         type: RETRIEVE_FILES,
@@ -113,5 +112,3 @@ export const findFilesByTitle = (title) => async (dispatch) => {
       console.log(err);
     }
   };
-
-// missing getById
