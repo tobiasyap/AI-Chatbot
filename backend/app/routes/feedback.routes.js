@@ -5,10 +5,14 @@
   
     var router = require("express").Router();
   
-    // Create a new file
+    // Create a new feedback
     router.post("/feedback", feedback.postFeedback);
-  
+
+    // Retrieve all feedbacks
+    router.get("/feedback", feedback.getFeedback);
+
     // Retrieve a single file with title
     // router.get("/files?title=:title", filesystem.findAll);
     app.use('/api', router);
   }
+

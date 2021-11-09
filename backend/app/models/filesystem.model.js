@@ -1,4 +1,5 @@
-// Create the data model for mongoDB
+// Create the mongoDB data model for filesystem
+
 module.exports = mongoose => {
   const FileSystem = mongoose.model(
     "filesystem",
