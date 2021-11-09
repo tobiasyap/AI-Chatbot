@@ -5,7 +5,6 @@ module.exports = mongoose => {
     "filesystem",
     mongoose.Schema(
       {
-        // parent: String, // null if root folder
         title: String,       // document title
         doc_cat: String,     // document category
         doc_type: String,    // document type

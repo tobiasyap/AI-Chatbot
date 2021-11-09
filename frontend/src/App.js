@@ -21,7 +21,8 @@ class App extends Component {
           <Switch>
             <Route exact path={["/", "/files"]} component={FileList} />
             <Route exact path={"/add"} component={AddFile} />
-            <Route exact path={"/files/:id"} component={File} />
+            {/* below can be extended for viewing file in another page */}
+            {/* <Route exact path={"/files/:id"} component={File} /> */}
           </Switch>
         </div>
           <Acronyms />
