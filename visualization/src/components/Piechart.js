@@ -17,6 +17,7 @@ class Piechart extends Component {
     });
 
     let data = await response.json();
+    // Obtaining number of "Yes" and "No"
     let pieData = {};
     for (let i = 0; i < data.length; i++) {
       const bool = data[i].boolean;
@@ -26,6 +27,7 @@ class Piechart extends Component {
         pieData[bool] += 1;
       }
     }
+    // To convert into the right data format for plotting
     var pie = [];
     for (var p in pieData) {
       pie.push([p, pieData[p]]);
@@ -38,7 +40,7 @@ class Piechart extends Component {
 
   render() {
     const { pieData } = this.state;
-    const COLORS = ["#20ada2", "#fa7474"];
+    const COLORS = ["#20ada2", "#fa7474"]; // Selection of colors on piechart, can be changed
 
     const renderActiveShape = (props) => {
       const RADIAN = Math.PI / 180;

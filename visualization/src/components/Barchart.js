@@ -17,6 +17,7 @@ class Barchart extends Component {
       });
 
       let data = await response.json();
+      // Obtaining frequency of words from user queries
       let wordFreq = [];
       let allWords = {};
       for (let i = 0; i < data.length; i++) {
@@ -30,13 +31,14 @@ class Barchart extends Component {
           }
         }
       }
+      // Sorting them in descending order of frequency
       for (var word in allWords) {
         wordFreq.push([word, allWords[word]]);
       }
       wordFreq = wordFreq.sort((a, b) => b[1] - a[1]);
       wordFreq = wordFreq.map(([word, count]) => ({ word, count }));
       await this.setState({
-        barData: wordFreq.slice(0, 10),
+        barData: wordFreq.slice(0, 10), // Obtaining only top 10 most commonly used words
       });
     } catch (err) {
       console.log(err);

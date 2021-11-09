@@ -17,6 +17,7 @@ class Wordcloud extends Component {
       });
 
       let data = await response.json();
+      // Obtaining frequency of words from user feedback
       let wordFreq = [];
       let allWords = {};
       for (let i = 0; i < data.length; i++) {
@@ -34,6 +35,7 @@ class Wordcloud extends Component {
           }
         }
       }
+      // Sorting them in descending order of frequency
       for (var word in allWords) {
         wordFreq.push([word, allWords[word]]);
       }

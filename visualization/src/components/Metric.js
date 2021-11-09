@@ -18,6 +18,7 @@ class Metric extends Component {
     });
 
     let data = await response.json();
+    // Obtaining latest time that feedback is created
     let times = data.map((x) => x.createdAt);
     let latest = times[0];
     for (let i = 0; i < times.length; i++) {
@@ -28,7 +29,7 @@ class Metric extends Component {
     latest = new Date(latest);
     this.setState({
       count: data.length,
-      time: moment(latest)._i.toLocaleString(),
+      time: moment(latest)._i.toLocaleString(), // Convert to Singapore Timezone
     });
   }
 
