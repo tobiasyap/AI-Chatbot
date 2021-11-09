@@ -1,27 +1,32 @@
-# LTA Fare Procedure Document Webpage & AI-Chatbot
+# LTA Fare System Procedure Document Web Application & AI-Chatbot
 
-This project aims to make LTA fare system protocol document retrieval easy and user-friendly. This is done through a revamp of the webpage and the inclusion of an AI-Chatbot to aid users with any queries related to searching for documents. THis project is a collaboration with NUS Computing Students.
+This project aims to make the LTA fare system protocol document retrieval process easy and user-friendly. This is done through a revamp of their existing webpage and the inclusion of an AI-Chatbot to aid users with their queries related to their search for documents. This project is a collaboration with NUS Computing Students.
 
 ## Installation
 
-1. Download a code editor or you choice. [Visual Studio Code] (https://code.visualstudio.com/download) is recommended. 
+1. Download a code editor of your choice. [Visual Studio Code](https://code.visualstudio.com/download) is recommended. 
 
-2. Ensure that [Java] (jdk.java.net/17/) is installed on your local computer.
-Java
+2. Ensure that the latest version of [Java](jdk.java.net/17/) is installed on your local computer.
 
-3. Ensure that [MongoDB community server] (https://www.mongodb.com/try/download) and [MongoDB Compass] (https://www.mongodb.com/try/download/tools) is installed.
-MongoDB Compass] (https://www.mongodb.com/try/download/tools) is a interface that allows user to interact with the mongodb server in a visual format.
+3. Ensure that [MongoDB community server](https://www.mongodb.com/try/download) and [MongoDB Compass](https://www.mongodb.com/try/download/tools) is installed.
+MongoDB Compass](https://www.mongodb.com/try/download/tools) is a interface that allows user to interact with the mongoDB server in a visual format.
 
-4. Ensure that [Node.js] (https://nodejs.org/en/download/) is installed. 
-[Node.js] (https://nodejs.org/en/download/) is the language used to code the Fare System File Display Tool.
+4. Ensure that the latest version of [Node.js](https://nodejs.org/en/download/) is installed. 
+[Node.js](https://nodejs.org/en/download/) Express is the framework used to code the backend RESTful APIs for the Fare System File Display Tool.
 
-5. Ensure that [Python] (https://www.python.org/downloads/) is installed. 
+5. Ensure that [Python 3.9](https://www.python.org/downloads/) is installed. 
 Python will be used to run the AI Chatbot backed code.
 
 ## Getting Started
 
-1. Ensure that all the relevant python packages are install on the local computer.
-If packages are not installed, use the package manager [pip](https://pip.pypa.io/en/stable/) to install relevant python packages used to run AI-Chatbot Script.
+1. Ensure that all the relevant python packages are installed on your local computer.
+If your packages are not installed, use the package manager [pip](https://pip.pypa.io/en/stable/) to install relevant python packages used to run the AI-Chatbot Script.
+
+```bash
+pip install requirements.txt
+``` 
+
+or alternatively 
 
 ```bash
 pip install pandas
@@ -34,9 +39,25 @@ pip install pymongo
 pip install datetime
 ```
 
-2. To run the MongoDB server, open a bash terminal and install all nodejs packages
+2. To run the Node.js Express backend server, open a bash terminal and install all the required packages
 
 ```bash
+cd backend
+npm install
+```
+
+All the relevant packages will be automatically downloaded and installed. Afterwards, start the server.
+
+```bash
+node server
+```
+
+The server should be hosted on localhost:8080.
+
+3. To run the React Redux Frontend for the File Display Tool, open a seperate bash terminal and install all the required packages.
+
+```bash
+cd frontend
 npm install
 ```
 
@@ -46,11 +67,12 @@ All the relevant packages will be automatically downloaded and installed. Afterw
 npm start
 ```
 
-The server should be hosted on localhost:\\8081
+A webpage hosted on localhost:8081 will open in the default web browser.
 
-3. To run the Fare System File Display Tool Frontend, open a seperate bash terminal and install all the nodejs packages.
+4. To run the React Frontend for the Chatbot Dashboard, open a seperate bash terminal and install all the required packages.
 
 ```bash
+cd visualization
 npm install
 ```
 
@@ -60,8 +82,7 @@ All the relevant packages will be automatically downloaded and installed. Afterw
 npm start
 ```
 
-A webpage hosted on localhost:\\8080 will open in the default web browser.
-
+A webpage hosted on localhost:3000 will open in the default web browser.
 
 
 ## Usage
