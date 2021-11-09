@@ -38,17 +38,25 @@ db.mongoose
     if (err) {
       console.log("Cannot connect to the database:", err)
       process.exit();
-    // } else {
-    //   await db.models.filesystem.deleteMany().then(response => {
-    //     console.log("response:", response);
-    //   }, error => { 
-    //     console.log("Cannot delete the documents:", error);
-    //   }) // end of deletion
-    //   await db.models.filesystem.insertMany(docs).then(response => {
-    //     console.log("Successfully inserted");
-    //   }, error => {
-    //     console.log("Cannot insert the documents:", error);
-    //   }) // end of insertion
+    } else {
+      // // delete all files in database
+      // await db.models.filesystem.deleteMany().then(response => {
+      //   console.log("response:", response);
+      // }, error => { 
+      //   console.log("Cannot delete the documents:", error);
+      // }) // end of deletion 
+      // // insert all documents in current version of docs.txt to database
+      // await db.models.filesystem.insertMany(docs).then(response => {
+      //   console.log("Successfully inserted");
+      // }, error => {
+      //   console.log("Cannot insert the documents:", error);
+      // }) // end of insertion
+      // // delete all feedbacks in database
+      // await db.models.feedback.deleteMany().then(response => {
+      //   console.log("response:", response);
+      // }, error => {
+      //   console.log("Cannot delete feedbacks:", error);
+      // }) // end of deleting feedbacks
     }
   }) // end of connection
 
