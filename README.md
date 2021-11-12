@@ -1,6 +1,6 @@
-# LTA Fare System Procedure Document Web Application & AI-Chatbot
+# File Display Web Application & AI-Chatbot
 
-This project aims to make the LTA fare system protocol document retrieval process easy and user-friendly. This is done through a revamp of their existing webpage and the inclusion of an AI-Chatbot to aid users with their queries related to their search for documents. This project is a collaboration with NUS Computing Students.
+This project aims to make the protocol document retrieval process easy and user-friendly. This is done through a revamp of their existing webpage and the inclusion of an AI-Chatbot to aid users with their queries related to their search for documents. This project is a collaboration with NUS Computing Students.
 
 ## Installation
 
